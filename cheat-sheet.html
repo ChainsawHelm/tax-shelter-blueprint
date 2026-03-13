@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credit Card Cheat Sheet — Q2 2026</title>
+<style>
+  @page { size: auto; margin: 0.2in; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    gap: 0.5in;
+  }
+
+  .print-instructions {
+    max-width: 540px;
+    text-align: center;
+    color: #555;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 0.2in;
+  }
+  .print-instructions strong { color: #000; }
+
+  .card-label {
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: -0.35in;
+    margin-top: 0.1in;
+    font-weight: 700;
+  }
+
+  .foldable {
+    width: 3.375in;
+    height: 4.25in;
+    border: 2pt solid #000;
+    border-radius: 0.08in;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    page-break-inside: avoid;
+  }
+
+  .half {
+    width: 100%;
+    height: 2.125in;
+    padding: 0.05in 0.09in;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .half.blue { background: #edf2ff; color: #000; }
+  .half.blue-alt { background: #e0e8f5; color: #000; }
+  .half.warm { background: #fff8ef; color: #000; }
+  .half.warm-alt { background: #fef0e0; color: #000; }
+
+  .fold-line {
+    width: 100%;
+    height: 0;
+    border-top: 1.5pt dashed #999;
+    position: relative;
+  }
+  .fold-line::after {
+    content: '✂ fold';
+    position: absolute;
+    right: 0.05in;
+    top: -5pt;
+    font-size: 5pt;
+    color: #999;
+    font-weight: 600;
+    background: #eee;
+    padding: 0 0.03in;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.015in;
+    border-bottom: 1.5pt solid #000;
+    padding-bottom: 0.01in;
+  }
+  .card-title {
+    font-size: 6.5pt;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #000;
+  }
+  .card-quarter {
+    font-size: 6pt;
+    font-weight: 800;
+    color: #000;
+  }
+
+  .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .notes-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card-footer {
+    font-size: 5pt;
+    color: #333;
+    text-align: right;
+    margin-top: 0.005in;
+    font-weight: 700;
+  }
+
+  /* --- CARD 1 FRONT --- */
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 0.04in;
+    padding: 0.011in 0;
+  }
+  .category {
+    font-size: 6.5pt;
+    font-weight: 900;
+    width: 0.7in;
+    flex-shrink: 0;
+    color: #000;
+    text-transform: uppercase;
+  }
+  .best-card {
+    font-size: 6.5pt;
+    font-weight: 700;
+    flex: 1;
+    color: #000;
+  }
+  .rate {
+    font-size: 6.5pt;
+    font-weight: 900;
+    color: #0050a0;
+    width: 0.4in;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .divider {
+    border: none;
+    border-top: 0.5pt solid #aaa;
+    margin: 0;
+  }
+  .highlight { color: #7a5200; font-weight: 900; }
+  .wife-tag { font-size: 6pt; color: #aa0055; font-weight: 900; }
+
+  .daily-carry {
+    background: #d4edda;
+    border: 1.5pt solid #006622;
+    border-radius: 3px;
+    padding: 0.015in 0.04in;
+    margin-top: 0.005in;
+  }
+  .daily-carry-text {
+    font-size: 6pt;
+    color: #003311;
+    font-weight: 800;
+    line-height: 1.3;
+  }
+
+  /* --- CARD 1 BACK --- */
+  .note-row {
+    display: flex;
+    gap: 0.03in;
+    padding: 0.009in 0;
+  }
+  .note-label {
+    font-size: 6pt;
+    font-weight: 900;
+    color: #0050a0;
+    width: 0.62in;
+    flex-shrink: 0;
+  }
+  .note-value {
+    font-size: 6pt;
+    color: #000;
+    flex: 1;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+  .discover-note {
+    background: #fff3cd;
+    border: 1.5pt solid #7a5200;
+    border-radius: 3px;
+    padding: 0.015in 0.04in;
+  }
+  .discover-note-text {
+    font-size: 6pt;
+    color: #3d2900;
+    line-height: 1.25;
+    font-weight: 800;
+  }
+
+  /* --- CARD 2 FRONT --- */
+  .tip-row {
+    display: flex;
+    gap: 0.03in;
+    padding: 0.009in 0;
+    align-items: baseline;
+  }
+  .tip-sit {
+    font-size: 6.5pt;
+    font-weight: 900;
+    color: #000;
+    width: 0.7in;
+    flex-shrink: 0;
+    text-transform: uppercase;
+  }
+  .tip-do {
+    font-size: 6.5pt;
+    color: #000;
+    flex: 1;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+  .section-divider {
+    border: none;
+    border-top: 1.5pt solid #cc0000;
+    margin: 0.008in 0;
+  }
+  .section-divider.blue {
+    border-top-color: #0050a0;
+  }
+  .warn { color: #cc0000; font-weight: 900; }
+  .good { color: #006622; font-weight: 900; }
+
+  /* --- CARD 2 BACK --- */
+  .credit-section-title {
+    font-size: 6pt;
+    font-weight: 900;
+    color: #aa0055;
+    text-transform: uppercase;
+    margin-bottom: 0.001in;
+  }
+  .credit-section-title.plat { color: #000; }
+
+  .freq-label {
+    font-size: 5.5pt;
+    font-weight: 900;
+    color: #0050a0;
+    text-transform: uppercase;
+    margin-top: 0.002in;
+  }
+
+  .credit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.001in 0.03in;
+  }
+  .credit-grid.three-col {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.001in 0.02in;
+  }
+
+  .cr {
+    font-size: 5.5pt;
+    color: #000;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  .credit-line {
+    font-size: 5.5pt;
+    color: #000;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  .cr .amt, .credit-line .amt { color: #006622; font-weight: 900; }
+
+  .credit-divider {
+    border: none;
+    border-top: 1.5pt solid #aa0055;
+    margin: 0.004in 0;
+  }
+
+  .expires {
+    background: #f8d7da;
+    border: 1pt solid #cc0000;
+    border-radius: 2px;
+    padding: 0.01in 0.03in;
+    font-size: 5.5pt;
+    font-weight: 900;
+    color: #cc0000;
+    text-align: center;
+    margin-top: 0.003in;
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; gap: 0.3in; }
+    .print-instructions, .card-label { display: none; }
+    .foldable { box-shadow: none; }
+    .fold-line::after { background: #fff; }
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="print-instructions">
+  <strong>Print at 100% scale.</strong> Cut, fold on dashed line, laminate.<br>
+  <span style="color:#aa0055; font-weight:800;">★</span> = wife's card
+</div>
+
+<!-- ================================================================ -->
+<!-- CARD 1: REWARDS                                                  -->
+<!-- ================================================================ -->
+<div class="card-label">Card 1 — Rewards</div>
+<div class="foldable">
+
+  <div class="half blue">
+    <div class="card-header">
+      <div class="card-title">Best Card Per Purchase</div>
+      <div class="card-quarter">Q2 2026</div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="category">Dining</div>
+        <div class="best-card highlight">Discover It (or Gold ★)</div>
+        <div class="rate highlight">5%/4×</div>
+      </div>
+      <hr class="divider">
+      <div class="row">
+        <div class="category">Home Impr.</div>
+        <div class="best-card highlight">Discover It</div>
+        <div class="rate highlight">5%</div>
+      </div>
+      <hr class="divider">
+      <div class="row">
+        <div class="category">Groceries</div>
+        <div class="best-card">Amex Gold <span class="wife-tag">★</span></div>
+        <div class="rate">4×pts</div>
+      </div>
+      <hr class="divider">
+      <div class="row">
+        <div class="category">Delta</div>
+        <div class="best-card">Delta SkyMiles Plat <span class="wife-tag">★</span></div>
+        <div class="rate">3×mi</div>
+      </div>
+      <hr class="divider">
+      <div class="row">
+        <div class="category">Other Air</div>
+        <div class="best-card">Chase Sapphire Pref.</div>
+        <div class="rate">2-5×</div>
+      </div>
+      <hr class="divider">
+      <div class="row">
+        <div class="category">Amazon/WF</div>
+        <div class="best-card">Chase Prime Visa</div>
+        <div class="rate">5%</div>
+      </div>
+      <hr class="divider">
+      <div class="row">
+        <div class="category">Streaming</div>
+        <div class="best-card">Chase Sapphire Pref.</div>
+        <div class="rate">3×pts</div>
+      </div>
+      <hr class="divider">
+      <div class="row">
+        <div class="category">Travel</div>
+        <div class="best-card">Chase Sapphire Pref.</div>
+        <div class="rate">2-5×</div>
+      </div>
+      <hr class="divider">
+      <div class="row">
+        <div class="category">Marriott</div>
+        <div class="best-card">Bonvoy Bold</div>
+        <div class="rate">3×pts</div>
+      </div>
+      <hr class="divider">
+      <div class="row">
+        <div class="category">Gas/Drug</div>
+        <div class="best-card">Chase Prime Visa</div>
+        <div class="rate">2%</div>
+      </div>
+      <hr class="divider">
+      <div class="daily-carry">
+        <div class="daily-carry-text">DEFAULT: Citi Double Cash 2% · Items over $100 → CSP or Quicksilver (purchase protection)</div>
+      </div>
+    </div>
+    <div class="card-footer"><span style="color:#aa0055;">★</span> wife's card · Expires Jun 30 — update Jul 2026</div>
+  </div>
+
+  <div class="fold-line"></div>
+
+  <div class="half blue-alt">
+    <div class="card-header">
+      <div class="card-title">Card Details</div>
+      <div class="card-quarter">Q2 2026</div>
+    </div>
+    <div class="notes-section">
+      <div class="note-row">
+        <div class="note-label">Δ SkyMi ★</div>
+        <div class="note-value">3× Delta/hotel · 2× dine/groc · Companion cert · $350/yr</div>
+      </div>
+      <hr class="divider">
+      <div class="note-row">
+        <div class="note-label">Gold ★</div>
+        <div class="note-value">4× dining ≤$50k · 4× US supers ≤$25k · 3× flights · $325/yr</div>
+      </div>
+      <hr class="divider">
+      <div class="note-row">
+        <div class="note-label">Sapphire</div>
+        <div class="note-value">5× Chase Travel · 3× dine/stream/groc · 2× travel · $95/yr</div>
+      </div>
+      <hr class="divider">
+      <div class="note-row">
+        <div class="note-label">Prime Visa</div>
+        <div class="note-value">5% Amazon+WF · 2% gas/dine/drug/transit · $0</div>
+      </div>
+      <hr class="divider">
+      <div class="note-row">
+        <div class="note-label">Bonvoy Bold</div>
+        <div class="note-value">3× Marriott · 2× travel · Silver Elite · 15 nights · $0</div>
+      </div>
+      <hr class="divider">
+      <div class="note-row">
+        <div class="note-label">Citi DblCash</div>
+        <div class="note-value">2% flat · <span class="warn">3% FTF · NEVER abroad</span> · No protections · $0</div>
+      </div>
+      <hr class="divider">
+      <div class="note-row">
+        <div class="note-label">Quicksilver</div>
+        <div class="note-value">1.5% flat · No FTF · Ext. warranty 5yr · $0</div>
+      </div>
+      <hr class="divider">
+      <div class="discover-note">
+        <div class="discover-note-text">DISCOVER Q2: 5% Restaurants + Home Improvement (Apr–Jun ≤$1,500) · discover.com/activate</div>
+      </div>
+    </div>
+    <div class="card-footer">CSP pts = 1.25¢ via Chase Travel · Discover: no FTF, limited intl.</div>
+  </div>
+
+</div>
+
+<!-- ================================================================ -->
+<!-- CARD 2: PERKS & CREDITS                                          -->
+<!-- ================================================================ -->
+<div class="card-label">Card 2 — Perks & Credits</div>
+<div class="foldable">
+
+  <div class="half warm">
+    <div class="card-header">
+      <div class="card-title">Perks & Protections</div>
+      <div class="card-quarter">Q2 2026</div>
+    </div>
+    <div class="card-body">
+      <div class="tip-row">
+        <div class="tip-sit">Rental Cars</div>
+        <div class="tip-do"><span class="good">CSP — PRIMARY insurance</span> · Always decline CDW</div>
+      </div>
+      <hr class="divider">
+      <div class="tip-row">
+        <div class="tip-sit">Online Groc.</div>
+        <div class="tip-do"><span class="good">CSP 3×</span> · In-store → <span class="good">Gold ★ 4×</span></div>
+      </div>
+      <hr class="divider">
+      <div class="tip-row">
+        <div class="tip-sit">Items >$100</div>
+        <div class="tip-do"><span class="good">CSP, Prime, Quicksilver, Bold</span> — 120-day protection + ext. warranty</div>
+      </div>
+      <hr class="divider">
+      <div class="tip-row">
+        <div class="tip-sit">Trip Cancel</div>
+        <div class="tip-do"><span class="good">CSP</span> $10k cancel/interrupt · $500 delay</div>
+      </div>
+      <hr class="divider">
+      <div class="tip-row">
+        <div class="tip-sit">International</div>
+        <div class="tip-do"><span class="good">Quicksilver</span> 1.5% · <span class="good">Delta Plat ★</span> · <span class="good">Gold ★</span> — no FTF</div>
+      </div>
+
+      <hr class="section-divider">
+
+      <div class="tip-row">
+        <div class="tip-sit">Abroad</div>
+        <div class="tip-do"><span class="warn">✗ Citi</span> 3% fee · <span class="warn">✗ Discover</span> not accepted outside US</div>
+      </div>
+      <hr class="divider">
+      <div class="tip-row">
+        <div class="tip-sit">Items >$100</div>
+        <div class="tip-do"><span class="warn">✗ Citi · ✗ Discover</span> — zero protection or warranty</div>
+      </div>
+      <hr class="divider">
+      <div class="tip-row">
+        <div class="tip-sit">Small Shops</div>
+        <div class="tip-do"><span class="warn">✗ Amex</span> — often not accepted, bring a Visa</div>
+      </div>
+      <hr class="divider">
+      <div class="tip-row">
+        <div class="tip-sit">Gas/Grocery</div>
+        <div class="tip-do"><span class="warn">✗ Quicksilver</span> — 1.5% when other cards get 2-4%</div>
+      </div>
+    </div>
+    <div class="card-footer">Global Entry/TSA Pre $120 on Delta Plat ★ (every 4yr) · Expires Jun 30 2026</div>
+  </div>
+
+  <div class="fold-line"></div>
+
+  <div class="half warm-alt">
+    <div class="card-header">
+      <div class="card-title">Use It or Lose It</div>
+      <div class="card-quarter">Q2 2026</div>
+    </div>
+    <div class="card-body">
+      <div>
+        <div class="credit-section-title plat">Delta SkyMiles Platinum ★ — $350/yr</div>
+        <div class="freq-label">Monthly Credits</div>
+        <div class="credit-grid">
+          <div class="cr"><span class="amt">$10</span> Rideshare (Uber/Lyft)</div>
+          <div class="cr"><span class="amt">$9.99</span> Uber One membership</div>
+        </div>
+        <div class="freq-label">Annual Perks</div>
+        <div class="credit-grid">
+          <div class="cr"><span class="amt">FREE</span> 1st checked bag (+ 8 companions)</div>
+          <div class="cr"><span class="amt">$120</span> Global Entry/TSA Pre (4yr)</div>
+        </div>
+        <div class="credit-line"><span class="amt">COMPANION CERT</span> — 1 free domestic RT after renewal (pay taxes only)</div>
+        <div class="credit-line">20% back on Delta in-flight purchases (food/Wi-Fi)</div>
+      </div>
+
+      <hr class="credit-divider">
+
+      <div>
+        <div class="credit-section-title">Amex Gold ★ — $325/yr · $424 in credits</div>
+        <div class="freq-label">Monthly</div>
+        <div class="credit-grid three-col">
+          <div class="cr"><span class="amt">$10</span> Uber Cash</div>
+          <div class="cr"><span class="amt">$7</span> Dunkin'</div>
+          <div class="cr"><span class="amt">$10</span> Dining (see below)</div>
+        </div>
+        <div class="credit-line" style="font-size:5pt;">↳ Grubhub · Cheesecake Factory · Five Guys · Goldbelly · wine.com</div>
+        <div class="freq-label">Semi-Annual</div>
+        <div class="credit-line"><span class="amt">$50</span> Resy (×2=$100/yr, enroll!)</div>
+      </div>
+
+      <div class="expires">REPRINT BY JUL 1 2026 — Discover categories + Amex credits may change</div>
+    </div>
+    <div class="card-footer">All credits require enrollment · Unused credits DO NOT roll over</div>
+  </div>
+
+</div>
+
+</body>
+</html>

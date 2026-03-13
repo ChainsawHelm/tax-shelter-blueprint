@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monthly Credit & Perk Tracker — Q2 2026</title>
+<style>
+  @page { size: letter portrait; margin: 0.4in; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #e8e8e8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5in;
+  }
+
+  .page {
+    width: 7.5in;
+    background: #fff;
+    padding: 0.4in;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    page-break-inside: avoid;
+  }
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 3px solid #1a1a2e;
+    padding-bottom: 0.08in;
+    margin-bottom: 0.15in;
+  }
+  .page-title {
+    font-size: 16pt;
+    font-weight: 900;
+    color: #1a1a2e;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .page-quarter {
+    font-size: 11pt;
+    font-weight: 800;
+    color: #555;
+  }
+
+  .subtitle {
+    font-size: 9pt;
+    color: #666;
+    margin-bottom: 0.2in;
+    font-weight: 600;
+  }
+
+  /* Card Section */
+  .card-section {
+    margin-bottom: 0.2in;
+    border: 1.5pt solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .card-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.06in 0.12in;
+    font-size: 10pt;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .card-section-header .fee {
+    font-size: 8.5pt;
+    font-weight: 700;
+    opacity: 0.8;
+  }
+  .card-section-header.delta { background: #1a1a2e; color: #fff; }
+  .card-section-header.gold { background: #c49b30; color: #fff; }
+  .card-section-header.discover { background: #ff6600; color: #fff; }
+  .card-section-header.csp { background: #003087; color: #fff; }
+
+  /* Month Grid */
+  .month-grid {
+    display: grid;
+    grid-template-columns: 2.2in repeat(6, 1fr);
+    border-bottom: 1px solid #eee;
+  }
+  .month-grid:last-child { border-bottom: none; }
+
+  .month-grid.header-row {
+    background: #f5f5f5;
+    font-size: 7.5pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #555;
+  }
+  .month-grid.header-row > div {
+    padding: 0.03in 0.04in;
+    text-align: center;
+    border-left: 1px solid #eee;
+  }
+  .month-grid.header-row > div:first-child {
+    text-align: left;
+    border-left: none;
+  }
+
+  .credit-row {
+    font-size: 8pt;
+    font-weight: 700;
+    color: #222;
+  }
+  .credit-row > div {
+    padding: 0.04in 0.04in;
+    border-left: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .credit-row > div:first-child {
+    justify-content: flex-start;
+    border-left: none;
+    padding-left: 0.08in;
+  }
+
+  .credit-name {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .credit-name .main {
+    font-size: 8pt;
+    font-weight: 800;
+    color: #000;
+  }
+  .credit-name .detail {
+    font-size: 6.5pt;
+    color: #666;
+    font-weight: 600;
+  }
+  .credit-amt {
+    color: #006622;
+    font-weight: 900;
+    font-size: 8pt;
+    margin-right: 0.04in;
+  }
+
+  /* Checkbox */
+  .check-box {
+    width: 14px;
+    height: 14px;
+    border: 1.5pt solid #999;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  /* Frequency label rows */
+  .freq-row {
+    background: #f9f9f9;
+    font-size: 7pt;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #888;
+    letter-spacing: 0.5px;
+    padding: 0.02in 0.08in;
+    border-bottom: 1px solid #eee;
+  }
+
+  /* Quarterly / Semi-Annual / Annual sections */
+  .period-section {
+    margin-bottom: 0.2in;
+    border: 1.5pt solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .period-header {
+    background: #2d2d44;
+    color: #fff;
+    padding: 0.05in 0.12in;
+    font-size: 10pt;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .period-grid {
+    display: grid;
+    grid-template-columns: 2.2in repeat(4, 1fr);
+    border-bottom: 1px solid #eee;
+  }
+  .period-grid:last-child { border-bottom: none; }
+  .period-grid.header-row > div {
+    padding: 0.03in 0.04in;
+    text-align: center;
+    border-left: 1px solid #eee;
+    background: #f5f5f5;
+    font-size: 7.5pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #555;
+  }
+  .period-grid.header-row > div:first-child {
+    text-align: left;
+    border-left: none;
+  }
+  .period-grid.credit-row > div {
+    padding: 0.04in 0.04in;
+    border-left: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8pt;
+    font-weight: 700;
+  }
+  .period-grid.credit-row > div:first-child {
+    justify-content: flex-start;
+    border-left: none;
+    padding-left: 0.08in;
+  }
+
+  /* Annual grid - 2 columns */
+  .annual-grid {
+    display: grid;
+    grid-template-columns: 2.8in 1fr 1fr;
+    border-bottom: 1px solid #eee;
+  }
+  .annual-grid:last-child { border-bottom: none; }
+  .annual-grid > div {
+    padding: 0.04in 0.06in;
+    border-left: 1px solid #eee;
+    font-size: 8pt;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+  }
+  .annual-grid > div:first-child {
+    border-left: none;
+  }
+  .annual-grid.header-row > div {
+    background: #f5f5f5;
+    font-size: 7.5pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #555;
+  }
+
+  /* Summary box */
+  .summary-box {
+    margin-top: 0.15in;
+    border: 2pt solid #1a1a2e;
+    border-radius: 6px;
+    padding: 0.1in 0.15in;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.08in;
+  }
+  .summary-item {
+    text-align: center;
+  }
+  .summary-label {
+    font-size: 7pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #666;
+  }
+  .summary-value {
+    font-size: 14pt;
+    font-weight: 900;
+    color: #006622;
+  }
+  .summary-value.cost {
+    color: #cc0000;
+  }
+  .summary-value.net {
+    color: #1a1a2e;
+  }
+
+  .footer-note {
+    margin-top: 0.1in;
+    font-size: 7pt;
+    color: #888;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .highlight-row { background: #fffbeb; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; width: 100%; padding: 0.3in; }
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-title">Credit & Perk Tracker</div>
+    <div class="page-quarter">Q2 2026 (Apr — Jun)</div>
+  </div>
+  <div class="subtitle">Check off each credit as you use it. Unused credits do NOT roll over. ★ = wife's card</div>
+
+  <!-- ============================================ -->
+  <!-- DELTA SKYMILES PLATINUM - MONTHLY            -->
+  <!-- ============================================ -->
+  <div class="card-section">
+    <div class="card-section-header delta">
+      <span>★ Delta SkyMiles Platinum — Monthly Credits</span>
+      <span class="fee">$350/yr</span>
+    </div>
+    <div class="month-grid header-row">
+      <div>Credit</div>
+      <div>Apr</div>
+      <div>May</div>
+      <div>Jun</div>
+      <div>Jul</div>
+      <div>Aug</div>
+      <div>Sep</div>
+    </div>
+    <div class="month-grid credit-row">
+      <div>
+        <div class="credit-name">
+          <span class="main"><span class="credit-amt">$10</span> Rideshare Credit</span>
+          <span class="detail">Uber, Lyft, Curb, Revel, Alto</span>
+        </div>
+      </div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+    </div>
+    <div class="month-grid credit-row">
+      <div>
+        <div class="credit-name">
+          <span class="main"><span class="credit-amt">$9.99</span> Uber One Membership</span>
+          <span class="detail">Must activate by Jun 25, 2026</span>
+        </div>
+      </div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- AMEX GOLD - MONTHLY                          -->
+  <!-- ============================================ -->
+  <div class="card-section">
+    <div class="card-section-header gold">
+      <span>★ Amex Gold — Monthly Credits</span>
+      <span class="fee">$325/yr</span>
+    </div>
+    <div class="month-grid header-row">
+      <div>Credit</div>
+      <div>Apr</div>
+      <div>May</div>
+      <div>Jun</div>
+      <div>Jul</div>
+      <div>Aug</div>
+      <div>Sep</div>
+    </div>
+    <div class="month-grid credit-row">
+      <div>
+        <div class="credit-name">
+          <span class="main"><span class="credit-amt">$10</span> Uber Cash</span>
+          <span class="detail">Loaded to Uber account monthly</span>
+        </div>
+      </div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+    </div>
+    <div class="month-grid credit-row">
+      <div>
+        <div class="credit-name">
+          <span class="main"><span class="credit-amt">$10</span> Dining Credit</span>
+          <span class="detail">Grubhub · Cheesecake Factory · Five Guys · Goldbelly · wine.com</span>
+        </div>
+      </div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+    </div>
+    <div class="month-grid credit-row">
+      <div>
+        <div class="credit-name">
+          <span class="main"><span class="credit-amt">$7</span> Dunkin' Credit</span>
+          <span class="detail">Statement credit at Dunkin' Donuts</span>
+        </div>
+      </div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- DISCOVER IT - QUARTERLY ACTIVATION           -->
+  <!-- ============================================ -->
+  <div class="card-section">
+    <div class="card-section-header discover">
+      <span>Discover It — Quarterly 5% Activation</span>
+      <span class="fee">$0/yr</span>
+    </div>
+    <div class="period-grid header-row">
+      <div>Quarter</div>
+      <div>Q2 (Apr-Jun)</div>
+      <div>Q3 (Jul-Sep)</div>
+      <div>Q4 (Oct-Dec)</div>
+      <div>Q1 (Jan-Mar)</div>
+    </div>
+    <div class="period-grid credit-row">
+      <div>
+        <div class="credit-name">
+          <span class="main">5% Category (up to $1,500)</span>
+          <span class="detail">Must activate at discover.com/activate</span>
+        </div>
+      </div>
+      <div style="flex-direction:column; font-size:7pt; text-align:center;">
+        <span style="font-weight:900; color:#006622;">Restaurants +</span>
+        <span style="font-weight:900; color:#006622;">Home Improv.</span>
+        <span class="check-box" style="margin-top:2px;"></span>
+      </div>
+      <div style="flex-direction:column; font-size:7pt;">
+        <span style="color:#888;">TBD</span>
+        <span class="check-box" style="margin-top:2px;"></span>
+      </div>
+      <div style="flex-direction:column; font-size:7pt;">
+        <span style="color:#888;">TBD</span>
+        <span class="check-box" style="margin-top:2px;"></span>
+      </div>
+      <div style="flex-direction:column; font-size:7pt;">
+        <span style="color:#888;">TBD</span>
+        <span class="check-box" style="margin-top:2px;"></span>
+      </div>
+    </div>
+    <div class="period-grid credit-row highlight-row">
+      <div>
+        <div class="credit-name">
+          <span class="main">Spending Used / $1,500 Cap</span>
+          <span class="detail">Track 5% spend to avoid exceeding cap</span>
+        </div>
+      </div>
+      <div style="font-size:9pt; font-weight:900;">$_____ </div>
+      <div style="font-size:9pt; font-weight:900;">$_____ </div>
+      <div style="font-size:9pt; font-weight:900;">$_____ </div>
+      <div style="font-size:9pt; font-weight:900;">$_____ </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SEMI-ANNUAL CREDITS                          -->
+  <!-- ============================================ -->
+  <div class="card-section">
+    <div class="card-section-header" style="background:#2d2d44; color:#fff;">
+      <span>★ Semi-Annual Credits</span>
+      <span class="fee">Enroll required</span>
+    </div>
+    <div class="annual-grid header-row">
+      <div>Credit</div>
+      <div>H1 (Jan-Jun)</div>
+      <div>H2 (Jul-Dec)</div>
+    </div>
+    <div class="annual-grid credit-row">
+      <div>
+        <div class="credit-name">
+          <span class="main"><span class="credit-amt">$50</span> Amex Gold — Resy Dining</span>
+          <span class="detail">Book through Resy app, must enroll</span>
+        </div>
+      </div>
+      <div><span class="check-box"></span></div>
+      <div><span class="check-box"></span></div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- ANNUAL PERKS                                 -->
+  <!-- ============================================ -->
+  <div class="card-section">
+    <div class="card-section-header" style="background:#4a1942; color:#fff;">
+      <span>Annual Perks — Don't Forget!</span>
+      <span class="fee">Use before renewal</span>
+    </div>
+    <div class="annual-grid header-row">
+      <div>Perk</div>
+      <div>Status</div>
+      <div>Date Used</div>
+    </div>
+    <div class="annual-grid credit-row">
+      <div>
+        <div class="credit-name">
+          <span class="main"><span class="credit-amt">FREE</span> ★ Delta Companion Certificate</span>
+          <span class="detail">1 free domestic RT after card renewal (taxes only)</span>
+        </div>
+      </div>
+      <div><span class="check-box"></span> Used</div>
+      <div>____/____/____</div>
+    </div>
+    <div class="annual-grid credit-row">
+      <div>
+        <div class="credit-name">
+          <span class="main"><span class="credit-amt">$120</span> ★ Delta Global Entry / TSA Pre</span>
+          <span class="detail">Every 4 years — check if due</span>
+        </div>
+      </div>
+      <div><span class="check-box"></span> Used</div>
+      <div>____/____/____</div>
+    </div>
+    <div class="annual-grid credit-row">
+      <div>
+        <div class="credit-name">
+          <span class="main">★ Delta Free Checked Bag</span>
+          <span class="detail">Auto — book Delta flights on this card + up to 8 companions</span>
+        </div>
+      </div>
+      <div style="font-size:7pt; color:#006622; font-weight:900;">AUTOMATIC</div>
+      <div>—</div>
+    </div>
+    <div class="annual-grid credit-row">
+      <div>
+        <div class="credit-name">
+          <span class="main">CSP — $50 Hotel Credit</span>
+          <span class="detail">Annual $50 hotel credit through Chase Travel</span>
+        </div>
+      </div>
+      <div><span class="check-box"></span> Used</div>
+      <div>____/____/____</div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- VALUE SUMMARY                                -->
+  <!-- ============================================ -->
+  <div class="summary-box">
+    <div class="summary-item">
+      <div class="summary-label">Delta Plat Credits/yr</div>
+      <div class="summary-value">$240</div>
+    </div>
+    <div class="summary-item">
+      <div class="summary-label">Gold Credits/yr</div>
+      <div class="summary-value">$424</div>
+    </div>
+    <div class="summary-item">
+      <div class="summary-label">Total Credits/yr</div>
+      <div class="summary-value">$664</div>
+    </div>
+    <div class="summary-item">
+      <div class="summary-label">Total Fees/yr</div>
+      <div class="summary-value cost">-$675</div>
+    </div>
+    <div class="summary-item">
+      <div class="summary-label">Companion Cert Value</div>
+      <div class="summary-value">$200-600</div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    All credits require enrollment unless marked AUTOMATIC · Unused monthly credits do NOT roll over · Update this tracker every quarter<br>
+    ★ = wife's card · This is Q2 2026 — reprint for Q3 in Jul 2026 · <strong style="color:#cc0000;">NOT FINANCIAL ADVICE</strong>
+  </div>
+
+</div>
+
+</body>
+</html>
