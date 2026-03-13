@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W-2 Employee Tax Shelter Blueprint</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e1117;
+    --bg-card: #161b22;
+    --bg-card-hover: #1c2230;
+    --border: #2a3040;
+    --text: #e6edf3;
+    --text-muted: #7d8590;
+    --text-dim: #484f58;
+
+    --phase1: #58a6ff;
+    --phase1-glow: rgba(88,166,255,0.15);
+    --phase1-border: rgba(88,166,255,0.3);
+
+    --phase2: #3fb950;
+    --phase2-glow: rgba(63,185,80,0.15);
+    --phase2-border: rgba(63,185,80,0.3);
+
+    --phase3: #d29922;
+    --phase3-glow: rgba(210,153,34,0.15);
+    --phase3-border: rgba(210,153,34,0.3);
+
+    --phase4: #bc8cff;
+    --phase4-glow: rgba(188,140,255,0.15);
+    --phase4-border: rgba(188,140,255,0.3);
+
+    --warn: #f85149;
+    --money: #3fb950;
+    --connector: #2a3040;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─── */
+  .hero {
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(88,166,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--phase1);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+  .hero h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 0.75rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.4s;
+  }
+  .hero h1 span { color: var(--phase1); }
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.6s;
+  }
+
+  .disclaimer-bar {
+    background: rgba(248,81,73,0.08);
+    border-top: 1px solid rgba(248,81,73,0.2);
+    border-bottom: 1px solid rgba(248,81,73,0.2);
+    padding: 0.6rem 2rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--warn);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ─── FLOW CONTAINER ─── */
+  .flow {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    position: relative;
+  }
+
+  /* ─── PHASE HEADERS ─── */
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 0 1.5rem;
+    position: relative;
+  }
+  .phase-header:first-child { margin-top: 0; }
+  .phase-number {
+    font-family: 'Anton', sans-serif;
+    font-size: 2.8rem;
+    line-height: 1;
+    opacity: 0.15;
+    flex-shrink: 0;
+  }
+  .phase-info h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+  }
+  .phase-info p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+  }
+  .phase-header.p1 .phase-number, .phase-header.p1 h2 { color: var(--phase1); }
+  .phase-header.p2 .phase-number, .phase-header.p2 h2 { color: var(--phase2); }
+  .phase-header.p3 .phase-number, .phase-header.p3 h2 { color: var(--phase3); }
+  .phase-header.p4 .phase-number, .phase-header.p4 h2 { color: var(--phase4); }
+
+  /* ─── CONNECTOR LINE ─── */
+  .connector {
+    width: 2px;
+    height: 28px;
+    background: var(--connector);
+    margin: 0 auto;
+    position: relative;
+  }
+  .connector::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--connector);
+  }
+  .connector.p1 { background: var(--phase1-border); }
+  .connector.p1::after { border-top-color: var(--phase1-border); }
+  .connector.p2 { background: var(--phase2-border); }
+  .connector.p2::after { border-top-color: var(--phase2-border); }
+  .connector.p3 { background: var(--phase3-border); }
+  .connector.p3::after { border-top-color: var(--phase3-border); }
+  .connector.p4 { background: var(--phase4-border); }
+  .connector.p4::after { border-top-color: var(--phase4-border); }
+
+  /* ─── ACTION NODES ─── */
+  .node {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    position: relative;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  }
+  .node:hover {
+    background: var(--bg-card-hover);
+  }
+  .node.p1 { border-left: 3px solid var(--phase1); }
+  .node.p1:hover { box-shadow: -4px 0 20px var(--phase1-glow), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.p2 { border-left: 3px solid var(--phase2); }
+  .node.p2:hover { box-shadow: -4px 0 20px var(--phase2-glow), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.p3 { border-left: 3px solid var(--phase3); }
+  .node.p3:hover { box-shadow: -4px 0 20px var(--phase3-glow), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.p4 { border-left: 3px solid var(--phase4); }
+  .node.p4:hover { box-shadow: -4px 0 20px var(--phase4-glow), 0 4px 20px rgba(0,0,0,0.3); }
+
+  .node-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .node-title .icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .node-body {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .node-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .money {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--money);
+    font-weight: 700;
+    font-size: 0.9em;
+  }
+  .tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    vertical-align: middle;
+  }
+  .tag.blue { background: var(--phase1-glow); color: var(--phase1); border: 1px solid var(--phase1-border); }
+  .tag.green { background: var(--phase2-glow); color: var(--phase2); border: 1px solid var(--phase2-border); }
+  .tag.amber { background: var(--phase3-glow); color: var(--phase3); border: 1px solid var(--phase3-border); }
+  .tag.purple { background: var(--phase4-glow); color: var(--phase4); border: 1px solid var(--phase4-border); }
+  .tag.red { background: rgba(248,81,73,0.1); color: var(--warn); border: 1px solid rgba(248,81,73,0.25); }
+
+  /* ─── DECISION DIAMONDS ─── */
+  .decision {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 0 0.5rem;
+  }
+  .diamond-wrap {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .diamond {
+    width: 38px;
+    height: 38px;
+    transform: rotate(45deg);
+    border: 2px solid;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+  .diamond span { transform: rotate(-45deg); }
+  .diamond.p1 { border-color: var(--phase1); background: var(--phase1-glow); }
+  .diamond.p2 { border-color: var(--phase2); background: var(--phase2-glow); }
+  .diamond.p3 { border-color: var(--phase3); background: var(--phase3-glow); }
+
+  .decision-content {
+    flex: 1;
+  }
+  .decision-q {
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
+  .decision-paths {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .path {
+    font-size: 0.78rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .path.yes {
+    background: rgba(63,185,80,0.12);
+    color: var(--phase2);
+    border: 1px solid rgba(63,185,80,0.25);
+  }
+  .path.no {
+    background: rgba(210,153,34,0.12);
+    color: var(--phase3);
+    border: 1px solid rgba(210,153,34,0.25);
+  }
+  .path.stay {
+    background: rgba(125,133,144,0.12);
+    color: var(--text-muted);
+    border: 1px solid rgba(125,133,144,0.25);
+  }
+
+  /* ─── SUB-STEPS ─── */
+  .sub-group {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-top: 0;
+  }
+  .sub-group.p2 { border-color: var(--phase2-border); }
+  .sub-group.p3 { border-color: var(--phase3-border); }
+
+  .sub-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+  }
+  .sub-title.p2 { color: var(--phase2); }
+  .sub-title.p3 { color: var(--phase3); }
+
+  .sub-step {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    padding: 0.35rem 0;
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+  .sub-step + .sub-step {
+    border-top: 1px solid rgba(42,48,64,0.6);
+  }
+  .sub-step .bullet {
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-top: 0.45rem;
+  }
+  .sub-step .bullet.p2 { background: var(--phase2); }
+  .sub-step .bullet.p3 { background: var(--phase3); }
+  .sub-step .bullet.p4 { background: var(--phase4); }
+
+  /* ─── EXAMPLE CALLOUTS ─── */
+  .example {
+    background: rgba(63,185,80,0.06);
+    border: 1px solid rgba(63,185,80,0.15);
+    border-radius: 6px;
+    padding: 0.7rem 1rem;
+    margin-top: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+  .example .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--phase2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+  .example.p3 {
+    background: rgba(210,153,34,0.06);
+    border-color: rgba(210,153,34,0.15);
+  }
+  .example.p3 .label { color: var(--phase3); }
+
+  /* ─── DEDUCTIONS LIST ─── */
+  .deductions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+  .ded {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    padding: 0.3rem 0.5rem;
+    background: rgba(63,185,80,0.06);
+    border-radius: 4px;
+    border: 1px solid rgba(63,185,80,0.1);
+  }
+
+  /* ─── WARNINGS FOOTER ─── */
+  .warnings {
+    max-width: 780px;
+    margin: 0 auto 4rem;
+    padding: 0 1.5rem;
+  }
+  .warnings-box {
+    background: rgba(248,81,73,0.05);
+    border: 1px solid rgba(248,81,73,0.2);
+    border-radius: 10px;
+    padding: 1.5rem;
+  }
+  .warnings-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.1rem;
+    color: var(--warn);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .warn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0.5rem;
+  }
+  .warn-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+  .warn-item .x {
+    color: var(--warn);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .flow > * {
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .flow > *:nth-child(1) { animation-delay: 0.1s; }
+  .flow > *:nth-child(2) { animation-delay: 0.15s; }
+  .flow > *:nth-child(3) { animation-delay: 0.2s; }
+  .flow > *:nth-child(4) { animation-delay: 0.25s; }
+  .flow > *:nth-child(5) { animation-delay: 0.3s; }
+  .flow > *:nth-child(6) { animation-delay: 0.35s; }
+  .flow > *:nth-child(7) { animation-delay: 0.4s; }
+  .flow > *:nth-child(8) { animation-delay: 0.45s; }
+  .flow > *:nth-child(9) { animation-delay: 0.5s; }
+  .flow > *:nth-child(10) { animation-delay: 0.55s; }
+  .flow > *:nth-child(11) { animation-delay: 0.6s; }
+  .flow > *:nth-child(12) { animation-delay: 0.65s; }
+  .flow > *:nth-child(13) { animation-delay: 0.7s; }
+  .flow > *:nth-child(14) { animation-delay: 0.75s; }
+  .flow > *:nth-child(15) { animation-delay: 0.8s; }
+  .flow > *:nth-child(16) { animation-delay: 0.85s; }
+  .flow > *:nth-child(17) { animation-delay: 0.9s; }
+  .flow > *:nth-child(18) { animation-delay: 0.95s; }
+  .flow > *:nth-child(19) { animation-delay: 1.0s; }
+  .flow > *:nth-child(20) { animation-delay: 1.05s; }
+  .flow > *:nth-child(21) { animation-delay: 1.1s; }
+  .flow > *:nth-child(22) { animation-delay: 1.15s; }
+  .flow > *:nth-child(23) { animation-delay: 1.2s; }
+  .flow > *:nth-child(24) { animation-delay: 1.25s; }
+  .flow > *:nth-child(25) { animation-delay: 1.3s; }
+  .flow > *:nth-child(26) { animation-delay: 1.35s; }
+  .flow > *:nth-child(27) { animation-delay: 1.4s; }
+  .flow > *:nth-child(28) { animation-delay: 1.45s; }
+  .flow > *:nth-child(29) { animation-delay: 1.5s; }
+  .flow > *:nth-child(30) { animation-delay: 1.55s; }
+  .flow > *:nth-child(31) { animation-delay: 1.6s; }
+  .flow > *:nth-child(32) { animation-delay: 1.65s; }
+  .flow > *:nth-child(33) { animation-delay: 1.7s; }
+  .flow > *:nth-child(34) { animation-delay: 1.75s; }
+  .flow > *:nth-child(35) { animation-delay: 1.8s; }
+  .flow > *:nth-child(36) { animation-delay: 1.85s; }
+  .flow > *:nth-child(37) { animation-delay: 1.9s; }
+  .flow > *:nth-child(38) { animation-delay: 1.95s; }
+  .flow > *:nth-child(39) { animation-delay: 2.0s; }
+  .flow > *:nth-child(40) { animation-delay: 2.05s; }
+  .flow > *:nth-child(n+20) { animation-delay: calc(0.1s + 0.05s * var(--i, 20)); }
+
+  /* ─── PRINT ─── */
+  @media print {
+    body { background: #fff; color: #111; }
+    .hero { padding: 1.5rem 1rem; }
+    .hero::before { display: none; }
+    .hero h1 { color: #111; font-size: 2rem; }
+    .hero h1 span { color: #2563eb; }
+    .hero p { color: #555; }
+    .hero-label { color: #2563eb; }
+    .disclaimer-bar { background: #fff5f5; color: #dc2626; border-color: #fecaca; }
+    .node { background: #f8f9fa; border-color: #dee2e6; break-inside: avoid; }
+    .node.p1 { border-left-color: #2563eb; }
+    .node.p2 { border-left-color: #16a34a; }
+    .node.p3 { border-left-color: #ca8a04; }
+    .node.p4 { border-left-color: #9333ea; }
+    .node-body, .sub-step, .warn-item { color: #333; }
+    .node-title, .decision-q { color: #111; }
+    .phase-number { opacity: 0.1; }
+    .phase-header.p1 .phase-number, .phase-header.p1 h2 { color: #2563eb; }
+    .phase-header.p2 .phase-number, .phase-header.p2 h2 { color: #16a34a; }
+    .phase-header.p3 .phase-number, .phase-header.p3 h2 { color: #ca8a04; }
+    .phase-header.p4 .phase-number, .phase-header.p4 h2 { color: #9333ea; }
+    .connector { background: #ccc; }
+    .connector::after { border-top-color: #ccc; }
+    .money { color: #16a34a; }
+    .warnings-box { background: #fff5f5; border-color: #fecaca; }
+    .warnings-title { color: #dc2626; }
+    .sub-group { background: #f0f0f0; }
+    .diamond { background: #f0f0f0 !important; }
+    .flow > * { opacity: 1; animation: none; }
+    .hero *, .disclaimer-bar { opacity: 1; animation: none; }
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 2rem; }
+    .phase-number { font-size: 2rem; }
+    .deductions { grid-template-columns: 1fr 1fr; }
+    .warn-grid { grid-template-columns: 1fr; }
+    .decision { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<header class="hero">
+  <div class="hero-label">Financial Blueprint // 2026 Edition</div>
+  <h1>W-2 Employee<br><span>Tax Shelter</span> Blueprint</h1>
+  <p>A step-by-step guide to legally reducing your taxable income — from foundation to advanced strategies.</p>
+</header>
+
+<div class="disclaimer-bar">
+  ⚠ This is education, not tax advice — consult a CPA before implementing any strategy
+</div>
+
+<!-- ═══════════════════ FLOW ═══════════════════ -->
+<div class="flow">
+
+  <!-- ──── PHASE 1 ──── -->
+  <div class="phase-header p1">
+    <div class="phase-number">01</div>
+    <div class="phase-info">
+      <h2>Foundation</h2>
+      <p>Do these first — available to every W-2 employee</p>
+    </div>
+  </div>
+
+  <div class="node p1">
+    <div class="node-title"><span class="icon">🏦</span> Max Out Employer 401(k)</div>
+    <div class="node-body">
+      Contribute the maximum: <span class="money">$23,500/yr</span> (or <span class="money">$31,000</span> if age 50+).<br>
+      Every dollar is <strong>pre-tax</strong> — directly reduces your taxable income. If your employer matches, this is free money.
+    </div>
+  </div>
+
+  <div class="connector p1"></div>
+
+  <div class="node p1">
+    <div class="node-title"><span class="icon">🏥</span> Open & Max Your HSA <span class="tag blue">TRIPLE TAX-FREE</span></div>
+    <div class="node-body">
+      <span class="money">$4,300</span> individual / <span class="money">$8,550</span> family.<br>
+      The <strong>single best tax vehicle</strong> in the US tax code: deductible going in, grows tax-free, withdrawals tax-free for medical. After age 65, works like a traditional IRA for any spending.
+      <br><em style="color:var(--text-dim); font-size:0.78rem;">Requires a High Deductible Health Plan (HDHP).</em>
+    </div>
+  </div>
+
+  <div class="connector p1"></div>
+
+  <div class="node p1">
+    <div class="node-title"><span class="icon">📈</span> Max Traditional or Roth IRA</div>
+    <div class="node-body">
+      <span class="money">$7,000/yr</span> (or <span class="money">$8,000</span> if age 50+).<br>
+      <strong>Traditional</strong> = tax deduction now, pay taxes later. <strong>Roth</strong> = pay taxes now, withdrawals are tax-free forever. Choose based on whether you expect higher or lower taxes in retirement.
+    </div>
+  </div>
+
+  <div class="connector p1"></div>
+
+  <div class="decision">
+    <div class="diamond-wrap"><div class="diamond p1"><span>?</span></div></div>
+    <div class="decision-content">
+      <div class="decision-q">Do you have a side hustle — or can you start one?</div>
+      <div class="decision-paths">
+        <div class="path yes">YES → Phase 2: Start a Business</div>
+        <div class="path no">NO → Skip to Phase 3: Real Estate</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──── PHASE 2 ──── -->
+  <div class="phase-header p2">
+    <div class="phase-number">02</div>
+    <div class="phase-info">
+      <h2>Start a Business</h2>
+      <p>A side business unlocks deductions your W-2 job can't touch</p>
+    </div>
+  </div>
+
+  <div class="node p2">
+    <div class="node-title"><span class="icon">🚀</span> Launch a Legitimate Side Business</div>
+    <div class="node-body">
+      Freelancing, consulting, e-commerce, content creation — anything with <strong>genuine profit motive</strong>. You do NOT need to quit your day job. The IRS safe harbor: profitable in 3 of 5 years.
+    </div>
+  </div>
+
+  <div class="connector p2"></div>
+
+  <div class="node p2">
+    <div class="node-title"><span class="icon">📄</span> Form a Single-Member LLC <span class="tag green">RECOMMENDED</span></div>
+    <div class="node-body">
+      An LLC provides <strong>liability protection</strong> (separates your personal assets from business debts). Tax-wise, a single-member LLC is "disregarded" — it files on <strong>Schedule C</strong>, same as a sole proprietorship. Simple setup, typically $50–500 depending on your state.
+    </div>
+  </div>
+
+  <div class="connector p2"></div>
+
+  <div class="node p2">
+    <div class="node-title"><span class="icon">✂️</span> Deduct Business Expenses</div>
+    <div class="node-body">
+      Everything <strong>ordinary and necessary</strong> for your business becomes a deduction:
+    </div>
+    <div class="deductions">
+      <div class="ded">🏠 Home office</div>
+      <div class="ded">🚗 Vehicle (biz %)</div>
+      <div class="ded">💻 Equipment §179</div>
+      <div class="ded">🌐 Internet/phone</div>
+      <div class="ded">🛫 Business travel</div>
+      <div class="ded">📚 Education</div>
+      <div class="ded">🔧 Software/tools</div>
+      <div class="ded">🏥 Health ins.*</div>
+    </div>
+    <div style="font-size:0.72rem; color:var(--text-dim); margin-top:0.4rem;">* Self-employed health insurance deduction if not covered by spouse's employer plan.</div>
+  </div>
+
+  <div class="connector p2"></div>
+
+  <div class="node p2">
+    <div class="node-title"><span class="icon">🏦</span> Open a Solo 401(k) <span class="tag green">BIG UNLOCK</span></div>
+    <div class="node-body">
+      As both employer <em>and</em> employee, you can shelter up to <span class="money">$69,000/yr</span>. This is on <strong>top of</strong> your W-2 employer's 401(k). The employee portion is shared across plans, but the employer contribution (25% of net SE income) is separate and unlimited up to the cap.
+    </div>
+  </div>
+
+  <div class="connector p2"></div>
+
+  <div class="decision">
+    <div class="diamond-wrap"><div class="diamond p2"><span>?</span></div></div>
+    <div class="decision-content">
+      <div class="decision-q">Is your side income consistently above $50k/yr?</div>
+      <div class="decision-paths">
+        <div class="path yes">YES → Elect S-Corp (see below)</div>
+        <div class="path stay">NO → Stay as LLC / Schedule C</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector p2"></div>
+
+  <div class="sub-group p2">
+    <div class="sub-title p2">S-Corp Election — Form 2553</div>
+    <div class="sub-step">
+      <div class="bullet p2"></div>
+      <div>Pay yourself a <strong>"reasonable salary"</strong> (e.g., <span class="money">$50,000</span>). This is subject to payroll taxes (FICA 15.3%).</div>
+    </div>
+    <div class="sub-step">
+      <div class="bullet p2"></div>
+      <div>Take <strong>remaining profit as distributions</strong> — distributions are <strong>NOT</strong> subject to self-employment tax (15.3%). This is the key savings.</div>
+    </div>
+    <div class="sub-step">
+      <div class="bullet p2"></div>
+      <div>Requires running payroll (use Gusto, QuickBooks Payroll, etc.) and filing an S-Corp return (Form 1120-S).</div>
+    </div>
+    <div class="example">
+      <div class="label">Example Savings</div>
+      <span class="money">$120k</span> net income → <span class="money">$50k</span> salary + <span class="money">$70k</span> distribution<br>
+      SE tax saved on $70k = <span class="money">~$10,710/yr</span>
+    </div>
+  </div>
+
+  <div class="connector p2"></div>
+
+  <div class="node p2">
+    <div class="node-title"><span class="icon">👨‍👧‍👦</span> Hire Your Kids (Under 18)</div>
+    <div class="node-body">
+      Pay each child up to <span class="money">$14,600</span> (standard deduction) — they pay <strong>$0 income tax</strong>. If your business is a sole prop or single-member LLC (not S-Corp), you also avoid <strong>payroll taxes</strong> for kids under 18. Must be legitimate work at reasonable pay.
+    </div>
+  </div>
+
+  <div class="connector p2"></div>
+
+  <div class="node p2">
+    <div class="node-title"><span class="icon">🌱</span> Fund Roth IRA for Your Kids</div>
+    <div class="node-body">
+      Once your child has earned income (from the job above), they can contribute to a <strong>Roth IRA</strong>. A teenager investing <span class="money">$7,000/yr</span> in a Roth gets <strong>50+ years of tax-free growth</strong>. This is generational wealth building.
+    </div>
+  </div>
+
+  <!-- ──── PHASE 3 ──── -->
+  <div class="phase-header p3">
+    <div class="phase-number">03</div>
+    <div class="phase-info">
+      <h2>Real Estate</h2>
+      <p>The classic tax shelter — depreciation creates losses on paper while you cash-flow</p>
+    </div>
+  </div>
+
+  <div class="node p3">
+    <div class="node-title"><span class="icon">🏠</span> Buy a Rental Property</div>
+    <div class="node-body">
+      Real estate is the most powerful legal tax shelter because of <strong>depreciation</strong>: the IRS lets you deduct the building's value over <strong>27.5 years</strong>, even while the property appreciates in real market value. This is a "paper loss" — you deduct money you didn't actually spend.
+    </div>
+    <div class="example p3">
+      <div class="label">Example — Depreciation</div>
+      Buy a <span class="money">$300k</span> property (land <span class="money">$60k</span>, building <span class="money">$240k</span>)<br>
+      Annual depreciation: <span class="money">$240k ÷ 27.5 = $8,727/yr</span> deduction — even while property gains value
+    </div>
+  </div>
+
+  <div class="connector p3"></div>
+
+  <div class="node p3">
+    <div class="node-title"><span class="icon">✂️</span> Stack Rental Deductions</div>
+    <div class="node-body">
+      On top of depreciation, deduct: <strong>mortgage interest, repairs, insurance, property management fees, travel to the property, HOA fees, property taxes, advertising for tenants</strong> — all against rental income.
+    </div>
+  </div>
+
+  <div class="connector p3"></div>
+
+  <div class="decision">
+    <div class="diamond-wrap"><div class="diamond p3"><span>?</span></div></div>
+    <div class="decision-content">
+      <div class="decision-q">Can you or your spouse qualify as a Real Estate Professional? (750+ hrs/yr in RE activities)</div>
+      <div class="decision-paths">
+        <div class="path yes">YES → The Big Unlock (see below)</div>
+        <div class="path no">NO → Passive Loss Rules Apply</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector p3"></div>
+
+  <div class="sub-group p3">
+    <div class="sub-title p3">Real Estate Professional Status (REPS) vs. Passive Loss Rules</div>
+    <div class="sub-step">
+      <div class="bullet p3"></div>
+      <div><strong>With REPS:</strong> Use <strong>ALL</strong> rental losses against your W-2 income. This is the "cheat code" — rental depreciation wipes out your taxable salary. Requires 750+ hours/yr AND more time in RE than any other job. One spouse qualifying is enough for MFJ returns.</div>
+    </div>
+    <div class="sub-step">
+      <div class="bullet p3"></div>
+      <div><strong>Without REPS:</strong> Deduct up to <span class="money">$25,000</span> in rental losses against other income if AGI is under <span class="money">$100k</span>. Phases out completely at <span class="money">$150k</span> AGI. Unused losses carry forward.</div>
+    </div>
+  </div>
+
+  <div class="connector p3"></div>
+
+  <div class="node p3">
+    <div class="node-title"><span class="icon">🔄</span> 1031 Exchange — Defer Gains Indefinitely</div>
+    <div class="node-body">
+      Sell a rental property → roll proceeds into a new property → <strong>defer all capital gains taxes</strong>. Repeat this your entire life. At death, your heirs receive a <strong>stepped-up cost basis</strong> — the accumulated gains are <strong>never taxed</strong>. This is how generational real estate wealth is built.
+    </div>
+  </div>
+
+  <!-- ──── PHASE 4 ──── -->
+  <div class="phase-header p4">
+    <div class="phase-number">04</div>
+    <div class="phase-info">
+      <h2>Advanced Strategies</h2>
+      <p>Layer these on top once your foundation is solid</p>
+    </div>
+  </div>
+
+  <div class="node p4">
+    <div class="node-title"><span class="icon">🏡</span> Augusta Rule <span class="tag purple">§280A</span></div>
+    <div class="node-body">
+      Rent your <strong>personal home</strong> to your own business for up to <strong>14 days/year</strong>. The rental income is <strong>tax-free to you</strong> (not reported). Your business deducts the rent as a legitimate expense. Must charge fair market rate and document with meeting minutes, comparable rental data, etc.
+    </div>
+  </div>
+
+  <div class="connector p4"></div>
+
+  <div class="node p4">
+    <div class="node-title"><span class="icon">📊</span> Donate Appreciated Stock (Not Cash)</div>
+    <div class="node-body">
+      Instead of selling stock → paying capital gains → donating cash, donate the stock directly to charity. You deduct the <strong>full market value</strong> and <strong>never pay capital gains</strong> on the appreciation. Double benefit: bigger deduction + zero tax on gains.
+    </div>
+  </div>
+
+  <div class="connector p4"></div>
+
+  <div class="node p4">
+    <div class="node-title"><span class="icon">🎁</span> Donor-Advised Fund (DAF) — Bunch Donations</div>
+    <div class="node-body">
+      If your annual giving is near the standard deduction threshold, <strong>bunch 3-5 years of donations into one year</strong> via a DAF. You get a massive deduction in year one (itemize), then take the standard deduction in subsequent years. Distribute from the DAF to charities over time.
+    </div>
+  </div>
+
+  <div class="connector p4"></div>
+
+  <div class="node p4">
+    <div class="node-title"><span class="icon">📉</span> Tax-Loss Harvesting</div>
+    <div class="node-body">
+      Sell investments that are <strong>down</strong> to realize capital losses. Offset capital gains dollar-for-dollar, plus deduct up to <span class="money">$3,000/yr</span> against ordinary income. Buy a similar (not "substantially identical") fund immediately to maintain exposure. Unused losses <strong>carry forward forever</strong>.
+    </div>
+  </div>
+
+  <div class="connector p4"></div>
+
+  <div class="node p4">
+    <div class="node-title"><span class="icon">🎗️</span> Qualified Charitable Distribution <span class="tag purple">AGE 70½+</span></div>
+    <div class="node-body">
+      Donate up to <span class="money">$105,000</span> directly from your IRA to charity. Counts toward your Required Minimum Distribution (RMD) but is <strong>NOT included in taxable income</strong>. Far better than withdrawing, paying tax, then donating.
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════ WARNINGS ═══════════════════ -->
+<div class="warnings">
+  <div class="warnings-box">
+    <div class="warnings-title">⚠ Critical Warnings</div>
+    <div class="warn-grid">
+      <div class="warn-item">
+        <span class="x">✕</span>
+        <span><strong>Profit motive required</strong> — the IRS expects your business to be profitable in 3 of 5 years. A fake business just for deductions is fraud.</span>
+      </div>
+      <div class="warn-item">
+        <span class="x">✕</span>
+        <span><strong>Don't over-deduct</strong> — claiming 100% business use of a personal vehicle or using your bedroom as a "home office" are audit red flags.</span>
+      </div>
+      <div class="warn-item">
+        <span class="x">✕</span>
+        <span><strong>Keep meticulous records</strong> — receipts, mileage logs, meeting minutes, time tracking. If you can't prove it, you can't deduct it.</span>
+      </div>
+      <div class="warn-item">
+        <span class="x">✕</span>
+        <span><strong>Spending ≠ saving</strong> — a $1,000 deduction in the 24% bracket saves $240. You're still out $760. Never spend just for the deduction.</span>
+      </div>
+      <div class="warn-item">
+        <span class="x">✕</span>
+        <span><strong>Consult a CPA</strong> — every situation is different. State taxes, AMT, phase-outs, and your specific income all change the math. Get professional advice.</span>
+      </div>
+      <div class="warn-item">
+        <span class="x">✕</span>
+        <span><strong>This is education, not tax advice</strong> — tax law changes frequently. Verify current limits, thresholds, and rules before acting on any strategy described here.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
