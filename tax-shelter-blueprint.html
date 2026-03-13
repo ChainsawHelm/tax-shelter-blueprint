@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tax Shelter Blueprint — Every Legal Strategy from W-2 to Billionaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0d12;
+  --bg-card: #12161e;
+  --bg-card-hover: #181d28;
+  --border: #242a38;
+  --text: #e6edf3;
+  --text-muted: #7d8590;
+  --text-dim: #484f58;
+
+  --t1: #58a6ff; --t1-glow: rgba(88,166,255,0.12); --t1-border: rgba(88,166,255,0.3);
+  --t2: #3fb950; --t2-glow: rgba(63,185,80,0.12); --t2-border: rgba(63,185,80,0.3);
+  --t3: #d29922; --t3-glow: rgba(210,153,34,0.12); --t3-border: rgba(210,153,34,0.3);
+  --t4: #2dd4bf; --t4-glow: rgba(45,212,191,0.12); --t4-border: rgba(45,212,191,0.3);
+  --t5: #f97316; --t5-glow: rgba(249,115,22,0.12); --t5-border: rgba(249,115,22,0.3);
+  --t6: #bc8cff; --t6-glow: rgba(188,140,255,0.12); --t6-border: rgba(188,140,255,0.3);
+  --t7: #f85149; --t7-glow: rgba(248,81,73,0.12); --t7-border: rgba(248,81,73,0.3);
+  --t8: #e3b341; --t8-glow: rgba(227,179,65,0.12); --t8-border: rgba(227,179,65,0.3);
+
+  --money: #3fb950;
+  --warn: #f85149;
+  --code-bg: rgba(88,166,255,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ═══ NAV ═══ */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,13,18,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  gap: 0.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.top-nav::-webkit-scrollbar { display: none; }
+.top-nav a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.35rem 0.6rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+.top-nav a:hover { filter: brightness(1.3); }
+.nav-t1 { color: var(--t1); } .nav-t1:hover { background: var(--t1-glow); }
+.nav-t2 { color: var(--t2); } .nav-t2:hover { background: var(--t2-glow); }
+.nav-t3 { color: var(--t3); } .nav-t3:hover { background: var(--t3-glow); }
+.nav-t4 { color: var(--t4); } .nav-t4:hover { background: var(--t4-glow); }
+.nav-t5 { color: var(--t5); } .nav-t5:hover { background: var(--t5-glow); }
+.nav-t6 { color: var(--t6); } .nav-t6:hover { background: var(--t6-glow); }
+.nav-t7 { color: var(--t7); } .nav-t7:hover { background: var(--t7-glow); }
+.nav-t8 { color: var(--t8); } .nav-t8:hover { background: var(--t8-glow); }
+
+/* ═══ HERO ═══ */
+.hero {
+  text-align: center;
+  padding: 5rem 2rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(88,166,255,0.06) 0%, rgba(63,185,80,0.03) 40%, transparent 70%);
+  pointer-events: none;
+}
+.hero-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--t1);
+  margin-bottom: 1rem;
+}
+.hero h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+.hero h1 .accent { color: var(--t1); }
+.hero h1 .accent2 { color: var(--money); }
+.hero p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.hero .subtitle {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-top: 0.5rem;
+}
+
+/* ═══ DISCLAIMER ═══ */
+.disclaimer {
+  background: rgba(248,81,73,0.06);
+  border-top: 1px solid rgba(248,81,73,0.2);
+  border-bottom: 1px solid rgba(248,81,73,0.2);
+  padding: 0.6rem 2rem;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--warn);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ═══ MAIN CONTENT ═══ */
+.content {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 5rem;
+}
+
+/* ═══ TIER SECTIONS ═══ */
+.tier {
+  margin-bottom: 2.5rem;
+}
+
+.tier-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+}
+.tier-num {
+  font-family: 'Anton', sans-serif;
+  font-size: 3.5rem;
+  line-height: 1;
+  opacity: 0.12;
+}
+.tier-info h2 {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+.tier-info .tier-sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.1rem;
+}
+.tier-info .tier-income {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  display: inline-block;
+  margin-top: 0.3rem;
+}
+
+/* Tier colors */
+.t1 .tier-num, .t1 h2 { color: var(--t1); }
+.t1 .tier-income { background: var(--t1-glow); color: var(--t1); border: 1px solid var(--t1-border); }
+.t1 .strategy { border-left-color: var(--t1); }
+.t1 .strategy:hover { box-shadow: -4px 0 20px var(--t1-glow); }
+
+.t2 .tier-num, .t2 h2 { color: var(--t2); }
+.t2 .tier-income { background: var(--t2-glow); color: var(--t2); border: 1px solid var(--t2-border); }
+.t2 .strategy { border-left-color: var(--t2); }
+.t2 .strategy:hover { box-shadow: -4px 0 20px var(--t2-glow); }
+
+.t3 .tier-num, .t3 h2 { color: var(--t3); }
+.t3 .tier-income { background: var(--t3-glow); color: var(--t3); border: 1px solid var(--t3-border); }
+.t3 .strategy { border-left-color: var(--t3); }
+.t3 .strategy:hover { box-shadow: -4px 0 20px var(--t3-glow); }
+
+.t4 .tier-num, .t4 h2 { color: var(--t4); }
+.t4 .tier-income { background: var(--t4-glow); color: var(--t4); border: 1px solid var(--t4-border); }
+.t4 .strategy { border-left-color: var(--t4); }
+.t4 .strategy:hover { box-shadow: -4px 0 20px var(--t4-glow); }
+
+.t5 .tier-num, .t5 h2 { color: var(--t5); }
+.t5 .tier-income { background: var(--t5-glow); color: var(--t5); border: 1px solid var(--t5-border); }
+.t5 .strategy { border-left-color: var(--t5); }
+.t5 .strategy:hover { box-shadow: -4px 0 20px var(--t5-glow); }
+
+.t6 .tier-num, .t6 h2 { color: var(--t6); }
+.t6 .tier-income { background: var(--t6-glow); color: var(--t6); border: 1px solid var(--t6-border); }
+.t6 .strategy { border-left-color: var(--t6); }
+.t6 .strategy:hover { box-shadow: -4px 0 20px var(--t6-glow); }
+
+.t7 .tier-num, .t7 h2 { color: var(--t7); }
+.t7 .tier-income { background: var(--t7-glow); color: var(--t7); border: 1px solid var(--t7-border); }
+.t7 .strategy { border-left-color: var(--t7); }
+.t7 .strategy:hover { box-shadow: -4px 0 20px var(--t7-glow); }
+
+.t8 .tier-num, .t8 h2 { color: var(--t8); }
+.t8 .tier-income { background: var(--t8-glow); color: var(--t8); border: 1px solid var(--t8-border); }
+.t8 .strategy { border-left-color: var(--t8); }
+.t8 .strategy:hover { box-shadow: -4px 0 20px var(--t8-glow); }
+
+/* ═══ STRATEGY CARDS ═══ */
+.strategy {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid;
+  border-radius: 8px;
+  margin-bottom: 0.6rem;
+  transition: background 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+.strategy:hover { background: var(--bg-card-hover); }
+
+.strategy summary {
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+.strategy summary::-webkit-details-marker { display: none; }
+.strategy summary::after {
+  content: '+';
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.strategy[open] summary::after { content: '-'; }
+
+.strategy-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.strategy-title .icon { margin-right: 0.4rem; }
+
+.strategy-body {
+  padding: 0 1.2rem 1rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.strategy-body strong { color: var(--text); font-weight: 600; }
+
+.m { font-family: 'JetBrains Mono', monospace; color: var(--money); font-weight: 700; font-size: 0.88em; }
+.warn-text { color: var(--warn); font-weight: 700; }
+
+.irc {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  font-weight: 600;
+  background: var(--code-bg);
+  color: var(--t1);
+  white-space: nowrap;
+}
+
+/* ═══ EXAMPLE BOXES ═══ */
+.example-box {
+  background: rgba(63,185,80,0.06);
+  border: 1px solid rgba(63,185,80,0.15);
+  border-radius: 6px;
+  padding: 0.65rem 0.9rem;
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+}
+.example-box .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--money);
+  margin-bottom: 0.15rem;
+}
+
+.warning-box {
+  background: rgba(248,81,73,0.06);
+  border: 1px solid rgba(248,81,73,0.15);
+  border-radius: 6px;
+  padding: 0.65rem 0.9rem;
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.warning-box .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--warn);
+  margin-bottom: 0.15rem;
+}
+
+.politician-box {
+  background: rgba(188,140,255,0.06);
+  border: 1px solid rgba(188,140,255,0.15);
+  border-radius: 6px;
+  padding: 0.65rem 0.9rem;
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.politician-box .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--t6);
+  margin-bottom: 0.15rem;
+}
+
+/* ═══ DEDUCTION GRID ═══ */
+.ded-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+.ded-item {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(63,185,80,0.06);
+  border: 1px solid rgba(63,185,80,0.1);
+  color: var(--text-muted);
+}
+
+/* ═══ INCOME SCENARIOS ═══ */
+.scenarios {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.scenarios h2 {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+.scenario {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  text-align: center;
+}
+.scenario .income {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.4rem;
+  margin-bottom: 0.15rem;
+}
+.scenario .type {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.scenario .strategies {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: left;
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
+}
+.scenario .savings {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--money);
+}
+.scenario .savings-label {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.s-blue .income { color: var(--t1); }
+.s-green .income { color: var(--t2); }
+.s-amber .income { color: var(--t3); }
+.s-orange .income { color: var(--t5); }
+.s-red .income { color: var(--t7); }
+
+/* ═══ FOOTER WARNINGS ═══ */
+.footer-warnings {
+  max-width: 860px;
+  margin: 0 auto 4rem;
+  padding: 0 1.5rem;
+}
+.fw-box {
+  background: rgba(248,81,73,0.04);
+  border: 1px solid rgba(248,81,73,0.15);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+.fw-title {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.1rem;
+  color: var(--warn);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.8rem;
+}
+.fw-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 0.5rem;
+}
+.fw-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+.fw-item .x { color: var(--warn); font-weight: 700; flex-shrink: 0; }
+
+/* ═══ SOURCES ═══ */
+.sources {
+  max-width: 860px;
+  margin: 0 auto 4rem;
+  padding: 0 1.5rem;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+.sources h3 {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.sources a { color: var(--t1); text-decoration: none; }
+.sources a:hover { text-decoration: underline; }
+.sources ul { list-style: none; }
+.sources li { margin-bottom: 0.2rem; }
+.sources li::before { content: '- '; color: var(--text-dim); }
+
+/* ═══ PRINT ═══ */
+@media print {
+  body { background: #fff; color: #111; font-size: 9pt; }
+  .top-nav { display: none; }
+  .hero { padding: 1rem; }
+  .hero h1 { color: #111; font-size: 1.8rem; }
+  .hero h1 .accent, .hero h1 .accent2 { color: #2563eb; }
+  .disclaimer { background: #fff5f5; color: #dc2626; }
+  .strategy { break-inside: avoid; background: #f8f9fa; border-color: #dee2e6; }
+  .strategy-body, .fw-item { color: #333; }
+  .m { color: #16a34a; }
+  .top-nav, .hero::before { display: none; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+}
+
+@media (max-width: 640px) {
+  .hero h1 { font-size: 2.2rem; }
+  .tier-num { font-size: 2.5rem; }
+  .scenario-grid { grid-template-columns: 1fr; }
+  .content { padding: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="top-nav">
+  <a href="#tier1" class="nav-t1">1. Foundation</a>
+  <a href="#tier2" class="nav-t2">2. Business</a>
+  <a href="#tier3" class="nav-t3">3. Real Estate</a>
+  <a href="#tier4" class="nav-t4">4. Retirement</a>
+  <a href="#tier5" class="nav-t5">5. Advanced Biz</a>
+  <a href="#tier6" class="nav-t6">6. Trusts</a>
+  <a href="#tier7" class="nav-t7">7. Billionaire</a>
+  <a href="#tier8" class="nav-t8">8. Geographic</a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+  <div class="hero-label">Comprehensive Tax Reduction Blueprint // 2026</div>
+  <h1><span class="accent">Tax Shelter</span><br>Blueprint</h1>
+  <p>Every legal strategy from your first 401(k) to the billionaire playbook. Dollar amounts. IRS code sections. Real examples.</p>
+  <p class="subtitle">8 Tiers &middot; 50+ Strategies &middot; Every Penny Accounted For</p>
+</header>
+
+<div class="disclaimer">This is education, not tax advice. Consult a CPA or tax attorney before implementing any strategy.</div>
+
+<!-- ═══════════ CONTENT ═══════════ -->
+<div class="content">
+
+<!-- ══════════════════════════════════════ -->
+<!-- TIER 1: FOUNDATION                     -->
+<!-- ══════════════════════════════════════ -->
+<section class="tier t1" id="tier1">
+  <div class="tier-header">
+    <div class="tier-num">01</div>
+    <div class="tier-info">
+      <h2>Foundation</h2>
+      <div class="tier-sub">Available to every W-2 employee — do these first</div>
+      <div class="tier-income">INCOME: Any</div>
+    </div>
+  </div>
+
+  <details class="strategy" open>
+    <summary><span class="strategy-title"><span class="icon">🏦</span> 401(k) / 403(b) / 457(b)</span></summary>
+    <div class="strategy-body">
+      <strong>Max contribution:</strong> <span class="m">$23,500/yr</span> (2025). Catch-up if 50+: <span class="m">+$7,500</span> = <span class="m">$31,000</span>. New "super catch-up" ages 60-63: <span class="m">+$11,250</span> = <span class="m">$34,750</span>.<br><br>
+      Every dollar is <strong>pre-tax</strong> — directly reduces your taxable income. If your employer matches, that's free money on top.<br><br>
+      <strong>457(b) stacks</strong> — government employees can max BOTH a 403(b) and 457(b) = <span class="m">$47,000/yr</span> sheltered.
+      <div class="example-box">
+        <div class="label">Example</div>
+        $100k salary, 24% bracket. Max 401(k) at $23,500 → save <span class="m">$5,640</span> in federal taxes. Employer match of 5% ($5,000) = <span class="m">$28,500 total sheltered</span>.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🏥</span> Health Savings Account (HSA)</span></summary>
+    <div class="strategy-body">
+      <span class="irc">IRC §223</span> The <strong>single best tax vehicle in the US tax code</strong>. Triple tax-free:<br>
+      1. Tax-deductible going in<br>
+      2. Grows tax-free (invest it!)<br>
+      3. Withdrawals tax-free for medical expenses<br><br>
+      <strong>2025 limits:</strong> <span class="m">$4,300</span> individual / <span class="m">$8,550</span> family. Catch-up 55+: <span class="m">+$1,000</span>.<br><br>
+      <strong>After age 65:</strong> Withdrawals for ANY purpose are taxed as ordinary income (like a Traditional IRA) — but no penalty. Pay medical expenses out of pocket now, save receipts, reimburse yourself from HSA decades later for maximum tax-free compounding.
+      <div class="example-box">
+        <div class="label">Example</div>
+        Family HSA: $8,550/yr for 20 years at 8% return = <span class="m">$420,000+ tax-free</span> for medical expenses in retirement.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">📈</span> Traditional & Roth IRA</span></summary>
+    <div class="strategy-body">
+      <span class="irc">IRC §219 / §408A</span> <strong>Limit:</strong> <span class="m">$7,000/yr</span> (<span class="m">$8,000</span> if 50+).<br><br>
+      <strong>Traditional IRA:</strong> Tax deduction now, pay taxes on withdrawal. Best if you expect lower taxes in retirement.<br>
+      <strong>Roth IRA:</strong> No deduction now, but withdrawals are tax-free forever. Best if you expect higher taxes later.<br><br>
+      <strong>Roth income limits (2026):</strong> Phase-out $153k-$168k single / $242k-$252k MFJ. But there's a workaround — see Tier 4 (Backdoor Roth).
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🔄</span> Mega Backdoor Roth</span></summary>
+    <div class="strategy-body">
+      <span class="irc">IRC §402(c)</span> Total 401(k) limit (employee + employer + after-tax): <span class="m">$72,000</span> (2026).<br><br>
+      After maxing your regular 401(k) deferrals ($23,500) and counting employer match, you can contribute the remainder as <strong>after-tax</strong> contributions and immediately convert to Roth. That's up to <span class="m">~$47,500 extra into Roth</span> annually.<br><br>
+      <strong>Requirement:</strong> Your employer's plan must allow after-tax contributions AND in-plan Roth conversions. Not all plans do — check with your plan administrator.
+      <div class="example-box">
+        <div class="label">Total annual shelter</div>
+        401(k): $23,500 + Mega Backdoor Roth: $47,500 + HSA: $8,550 + IRA: $7,000 = <span class="m">$86,550/yr sheltered</span>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- TIER 2: START A BUSINESS               -->
+<!-- ══════════════════════════════════════ -->
+<section class="tier t2" id="tier2">
+  <div class="tier-header">
+    <div class="tier-num">02</div>
+    <div class="tier-info">
+      <h2>Start a Business</h2>
+      <div class="tier-sub">A side business unlocks deductions your W-2 job can't touch</div>
+      <div class="tier-income">INCOME: Any side income</div>
+    </div>
+  </div>
+
+  <details class="strategy" open>
+    <summary><span class="strategy-title"><span class="icon">📄</span> Form a Single-Member LLC</span></summary>
+    <div class="strategy-body">
+      An LLC gives you <strong>liability protection</strong> (separates personal assets from business debts). Cost: $50-$500 depending on state.<br><br>
+      Tax-wise, a single-member LLC is "disregarded" — files on <strong>Schedule C</strong>, same as a sole proprietorship. Simple and powerful.
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">✂️</span> Business Expense Deductions</span></summary>
+    <div class="strategy-body">
+      Everything <strong>ordinary and necessary</strong> for your business reduces your taxable income:
+      <div class="ded-grid">
+        <div class="ded-item">🏠 Home office</div>
+        <div class="ded-item">🚗 Vehicle (biz %)</div>
+        <div class="ded-item">💻 Equipment §179</div>
+        <div class="ded-item">🌐 Internet / phone</div>
+        <div class="ded-item">🛫 Business travel</div>
+        <div class="ded-item">📚 Education / courses</div>
+        <div class="ded-item">🔧 Software / tools</div>
+        <div class="ded-item">🏥 Health insurance*</div>
+      </div>
+      <br>
+      <span class="irc">§179</span> <strong>Section 179 deduction:</strong> Now <span class="m">$2.5M limit</span> (up from $1M per OBBBA), phaseout at $4M. Deduct the <strong>full cost</strong> of qualifying equipment in year 1 instead of depreciating over time.<br><br>
+      <strong>Vehicle strategy:</strong> Vehicles over 6,000 lbs GVWR qualify for Section 179 up to <span class="m">$28,900</span> (SUV cap). Business use % must be documented.<br><br>
+      <small style="color:var(--text-dim);">*Self-employed health insurance deduction if not covered by spouse's employer plan.</small>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🏦</span> Solo 401(k)</span></summary>
+    <div class="strategy-body">
+      <span class="irc">IRC §401(k)</span> As both employer AND employee, you can contribute up to <span class="m">$69,000/yr</span>.<br><br>
+      <strong>Employee portion:</strong> $23,500 (shared with W-2 employer's plan).<br>
+      <strong>Employer portion:</strong> 25% of net self-employment income (this is SEPARATE and stacks).<br><br>
+      If you're also maxing a W-2 employer's 401(k), you can still make employer contributions to the Solo 401(k).
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🏢</span> S-Corp Election — Save 15.3% SE Tax</span></summary>
+    <div class="strategy-body">
+      <span class="irc">Form 2553</span> When side income exceeds ~<span class="m">$50k/yr</span>, elect S-Corp taxation:<br><br>
+      1. Pay yourself a <strong>"reasonable salary"</strong> (subject to FICA 15.3%)<br>
+      2. Take remaining profit as <strong>distributions</strong> — NOT subject to self-employment tax<br><br>
+      <strong>Reasonable salary rules:</strong> The "60/40 rule" is a myth — the IRS uses market-based analysis. Document with comparable salary data. No mechanical formula.<br>
+      <strong>Social Security wage base:</strong> <span class="m">$176,100</span> (2025).
+      <div class="example-box">
+        <div class="label">S-Corp Savings Example</div>
+        <span class="m">$120k</span> net income → <span class="m">$50k</span> salary + <span class="m">$70k</span> distribution<br>
+        SE tax saved on $70k: <span class="m">~$10,710/yr</span>
+      </div>
+      <div class="politician-box">
+        <div class="label">Politician Playbook</div>
+        <strong>Joe Biden</strong> sheltered over <span class="m">$13 million</span> through two S-corporations (CelticCapri Corp and Giacoppa Corp), avoiding the 3.8% Medicare surtax on net investment income.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">📊</span> QBI Deduction — 20% Off Business Income</span></summary>
+    <div class="strategy-body">
+      <span class="irc">§199A</span> Deduct <strong>20%</strong> of qualified business income from pass-through entities (S-Corps, LLCs, sole props). Now <strong>permanent</strong> per OBBBA.<br><br>
+      <strong>2026 phase-out:</strong> Starts at ~<span class="m">$200k</span> single / <span class="m">$400k</span> MFJ. Full phase-out at <span class="m">$275k</span> / <span class="m">$550k</span>.<br><br>
+      Above phase-out: limited to greater of 50% of W-2 wages paid OR 25% of wages + 2.5% of property basis.
+      <div class="example-box">
+        <div class="label">Example</div>
+        $200k business income × 20% = <span class="m">$40,000 deduction</span>. At 32% bracket = <span class="m">$12,800 saved</span>.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🏡</span> Augusta Rule</span></summary>
+    <div class="strategy-body">
+      <span class="irc">§280A(g)</span> Rent your <strong>personal home</strong> to your own business for up to <strong>14 days/year</strong>.<br><br>
+      <strong>You:</strong> The rental income is completely <strong>tax-free</strong> (not reported).<br>
+      <strong>Your business:</strong> Deducts the rent as an ordinary business expense.<br><br>
+      <strong>Documentation required:</strong> Written rental agreement, meeting agenda, attendee list, minutes, fair market value support (comparable rental rates), payment records, day-count tracker.<br><br>
+      Must charge <strong>fair market rate</strong>. If comparable homes rent for $200/night, don't charge $1,000.
+      <div class="example-box">
+        <div class="label">Example</div>
+        14 days × $500/day (FMV) = <span class="m">$7,000 tax-free to you</span>, <span class="m">$7,000 deduction for your business</span>.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">👨‍👧‍👦</span> Hire Your Kids (Under 18)</span></summary>
+    <div class="strategy-body">
+      Pay each child up to <span class="m">$14,600</span> (standard deduction) — they pay <strong>$0 income tax</strong>.<br><br>
+      If your business is a sole prop or single-member LLC (NOT S-Corp): also <strong>no payroll taxes</strong> for kids under 18. <span class="irc">FICA §3121(b)(3)(A)</span><br><br>
+      Must be <strong>legitimate work</strong> at <strong>reasonable pay</strong> — filing, cleaning, social media, etc.<br><br>
+      Then fund a <strong>Roth IRA</strong> for them with their earned income. A teenager investing <span class="m">$7,000/yr</span> gets 50+ years of tax-free compound growth.
+    </div>
+  </details>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- TIER 3: REAL ESTATE                    -->
+<!-- ══════════════════════════════════════ -->
+<section class="tier t3" id="tier3">
+  <div class="tier-header">
+    <div class="tier-num">03</div>
+    <div class="tier-info">
+      <h2>Real Estate</h2>
+      <div class="tier-sub">The classic tax shelter — depreciation creates losses on paper while you cash-flow</div>
+      <div class="tier-income">INCOME: $75k+ recommended</div>
+    </div>
+  </div>
+
+  <details class="strategy" open>
+    <summary><span class="strategy-title"><span class="icon">🏠</span> Depreciation — The Paper Loss</span></summary>
+    <div class="strategy-body">
+      <span class="irc">§168</span> The IRS lets you deduct the building's value over <strong>27.5 years</strong> (residential) or <strong>39 years</strong> (commercial), even while the property <strong>appreciates</strong> in real market value. This is a "paper loss" — you deduct money you didn't spend.
+      <div class="example-box">
+        <div class="label">Example</div>
+        Buy <span class="m">$300k</span> property (land $60k, building $240k).<br>
+        Annual depreciation: <span class="m">$240k ÷ 27.5 = $8,727/yr</span> deduction — for 27.5 years. Even while the property gains value.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">⚡</span> Cost Segregation + Bonus Depreciation</span></summary>
+    <div class="strategy-body">
+      A <strong>cost segregation study</strong> reclassifies 25-30% of a property into 5, 7, or 15-year assets (appliances, flooring, landscaping, etc.) instead of 27.5 years.<br><br>
+      <strong>100% bonus depreciation RESTORED</strong> by OBBBA for assets acquired after Jan 19, 2025. The previous phase-down (80% → 60% → 40% → 20% → 0%) has been eliminated.<br><br>
+      Combined: <strong>massive year-1 deductions</strong>.
+      <div class="example-box">
+        <div class="label">Example</div>
+        <span class="m">$500k</span> property. Cost seg reclassifies 28% = $140k into short-life assets.<br>
+        With 100% bonus depreciation: <span class="m">$140,000 first-year deduction</span> (instead of ~$5,000/yr over 27.5 years).
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🏨</span> Short-Term Rental (STR) Loophole</span></summary>
+    <div class="strategy-body">
+      <span class="irc">IRC §469</span> This is NOT a gray area — it's built into the tax code.<br><br>
+      <strong>How it works:</strong> Rental properties with average guest stays of <strong>7 days or fewer</strong> are classified as <strong>non-passive</strong> when the owner <strong>materially participates</strong> (100+ hours/year).<br><br>
+      This means: STR losses (including accelerated depreciation from cost seg) can offset your <strong>W-2 income</strong> — WITHOUT needing Real Estate Professional Status.<br><br>
+      <strong>Combined with cost segregation:</strong> Buy an Airbnb → cost seg study → 100% bonus depreciation → <span class="m">$100k-$150k+ write-off against your salary in year 1</span>.
+      <div class="warning-box">
+        <div class="label">IRS Scrutiny</div>
+        Must genuinely materially participate. Keep time logs. Average guest stay must be documented as ≤7 days.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🏗️</span> REPS — Real Estate Professional Status</span></summary>
+    <div class="strategy-body">
+      <span class="irc">§469(c)(7)</span> If you or your spouse spend <strong>750+ hours/year</strong> in real estate activities AND more time in RE than any other job:<br><br>
+      <strong>ALL rental losses offset your W-2 income.</strong> This is the "cheat code" for high-earning couples — one spouse qualifies as REPS while the other keeps the day job.<br><br>
+      <strong>Without REPS:</strong> You can still deduct up to <span class="m">$25,000</span> in rental losses if AGI &lt; <span class="m">$100k</span> (phases out by $150k).
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🔄</span> 1031 Exchange — Defer Gains Forever</span></summary>
+    <div class="strategy-body">
+      <span class="irc">§1031</span> Sell a rental property → reinvest proceeds into a new rental → <strong>defer ALL capital gains taxes</strong>. No limit on how many times you can do this.<br><br>
+      <strong>At death:</strong> Heirs receive a <strong>stepped-up cost basis</strong>. All accumulated gains are <strong>never taxed</strong>. This is how generational real estate wealth is built.<br><br>
+      <strong>Rules:</strong> Must identify replacement property within 45 days. Must close within 180 days. Must be "like-kind" (any real estate for any real estate). Use a qualified intermediary.
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🏙️</span> Opportunity Zones</span></summary>
+    <div class="strategy-body">
+      <span class="irc">§1400Z</span> Invest capital gains into a Qualified Opportunity Fund within <strong>180 days</strong> of the gain event:<br><br>
+      1. <strong>Defer</strong> the original capital gain until 2026<br>
+      2. <strong>Hold for 10+ years</strong> → pay <strong>ZERO tax</strong> on all new appreciation in the OZ investment<br><br>
+      OBBBA extended the program with new designations and rural-focused incentives.<br><br>
+      <strong>Example:</strong> Sell stock with <span class="m">$500k</span> gain → invest in OZ fund → in 10 years the OZ investment doubles to $1M → the <span class="m">$500k of new gains is 100% tax-free</span>.
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🏡</span> Primary Residence Exclusion</span></summary>
+    <div class="strategy-body">
+      <span class="irc">§121</span> Exclude up to <span class="m">$250,000</span> single / <span class="m">$500,000</span> married of capital gains on the sale of your primary residence. Must have lived there 2 of the last 5 years. Can use this every 2 years.
+    </div>
+  </details>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- TIER 4: RETIREMENT HACKS               -->
+<!-- ══════════════════════════════════════ -->
+<section class="tier t4" id="tier4">
+  <div class="tier-header">
+    <div class="tier-num">04</div>
+    <div class="tier-info">
+      <h2>Retirement Account Hacks</h2>
+      <div class="tier-sub">Supercharge retirement savings beyond the basics</div>
+      <div class="tier-income">INCOME: $100k+</div>
+    </div>
+  </div>
+
+  <details class="strategy" open>
+    <summary><span class="strategy-title"><span class="icon">🚪</span> Backdoor Roth IRA</span></summary>
+    <div class="strategy-body">
+      For high earners above Roth income limits:<br><br>
+      1. Contribute <span class="m">$7,000</span> to a <strong>Traditional IRA</strong> (non-deductible)<br>
+      2. Immediately convert to <strong>Roth IRA</strong><br>
+      3. No income limit on conversions<br><br>
+      <strong>Pro-rata rule warning:</strong> If you have existing pre-tax IRA balances, a portion of the conversion will be taxable. Solution: roll pre-tax IRA money into your employer's 401(k) first.
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🏛️</span> Defined Benefit / Cash Balance Plan</span></summary>
+    <div class="strategy-body">
+      The <strong>most powerful retirement shelter</strong> for business owners. Annual contributions range from <span class="m">$100,000 to $400,000+</span> depending on age.<br><br>
+      <strong>2026 limits:</strong> Annual benefit up to <span class="m">$290,000/yr</span> in retirement. Lifetime contributions up to <span class="m">~$3.7M</span>. Compensation cap: <span class="m">$360,000</span>.<br><br>
+      <strong>Stacks</strong> on top of your 401(k). A 55-year-old business owner can shelter <span class="m">$350k+/yr</span> between 401(k) + cash balance plan.<br><br>
+      Tax savings at the 37% bracket: <span class="m">$130,000+ per year</span>.
+      <div class="example-box">
+        <div class="label">Combined Strategy</div>
+        401(k): $23,500 + Cash balance plan: $250,000 + HSA: $8,550 = <span class="m">$282,050 sheltered/yr</span>
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🔓</span> Self-Directed IRA (SDIRA)</span></summary>
+    <div class="strategy-body">
+      Invest IRA funds in <strong>real estate, private equity, crypto, precious metals, private loans</strong> — not just stocks and bonds.<br><br>
+      <strong>Checkbook IRA LLC:</strong> Your SDIRA owns 100% of an LLC. You manage the LLC's checkbook directly — no custodian approval delays. Write checks to buy assets instantly.<br><br>
+      <strong>Restricted investments:</strong> Collectibles, life insurance, S-Corp stock.<br><br>
+      <strong>UBIT warning:</strong> If the SDIRA invests with debt (mortgage), Unrelated Debt-Financed Income tax applies to the leveraged portion. Also applies to active business income. File Form 990-T.
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🪜</span> Roth Conversion Ladder (FIRE Strategy)</span></summary>
+    <div class="strategy-body">
+      For early retirees who want to access retirement funds before 59½:<br><br>
+      1. Retire with large Traditional IRA/401(k) balance<br>
+      2. Each year, convert a portion to Roth in low-income years (fill the 0%, 10%, 12% brackets)<br>
+      3. Each conversion starts a <strong>5-year clock</strong><br>
+      4. After 5 years, withdraw converted principal <strong>penalty-free at any age</strong><br><br>
+      <strong>Bridge strategy:</strong> Use taxable accounts, Roth contributions (always withdrawable), or cash to cover the first 5 years while the ladder builds.
+      <div class="example-box">
+        <div class="label">Example</div>
+        $1M in Traditional IRA. Convert $50k/yr in the 12% bracket = <span class="m">$6,000/yr in taxes</span> instead of 24-32% later. After 5 years: $50k/yr accessible penalty-free. Effective tax rate: <span class="m">12% instead of 24%+</span>.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🦄</span> Peter Thiel's Roth Strategy</span></summary>
+    <div class="strategy-body">
+      PayPal co-founder Peter Thiel bought <strong>1.7 million shares</strong> of his startup at <span class="m">$0.001/share</span> inside a Roth IRA. Total cost: <span class="m">$1,700</span>.<br><br>
+      Those shares grew into <span class="m">$5 billion</span> — all inside a Roth IRA, meaning <strong>100% tax-free</strong>.<br><br>
+      <strong>How it worked:</strong> Buy QSBS (qualified small business stock) at founder-price inside a Roth. As the company grows, all gains compound tax-free forever.<br><br>
+      <strong>Current status:</strong> Congress has introduced bills to cap Roth IRA balances, but none have passed yet.
+      <div class="politician-box">
+        <div class="label">ProPublica Investigation</div>
+        Thiel's Roth held shares in multiple startups. From $1,700 to $5 billion. Zero taxes owed. Ever.
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- TIER 5: ADVANCED BUSINESS              -->
+<!-- ══════════════════════════════════════ -->
+<section class="tier t5" id="tier5">
+  <div class="tier-header">
+    <div class="tier-num">05</div>
+    <div class="tier-info">
+      <h2>Advanced Business Structures</h2>
+      <div class="tier-sub">C-Corps, entity stacking, and six-figure tax elimination</div>
+      <div class="tier-income">INCOME: $200k+</div>
+    </div>
+  </div>
+
+  <details class="strategy" open>
+    <summary><span class="strategy-title"><span class="icon">🏗️</span> QSBS — $15 Million Tax-Free</span></summary>
+    <div class="strategy-body">
+      <span class="irc">§1202</span> C-Corporation stock held 5+ years: exclude up to <span class="m">$15 million</span> in capital gains (OBBBA increased from $10M). Or 10× your adjusted basis — whichever is greater.<br><br>
+      <strong>OBBBA changes (July 2025):</strong><br>
+      &bull; Per-issuer cap raised to <span class="m">$15M</span> (inflation-adjusted starting 2027)<br>
+      &bull; Gross asset threshold raised to <span class="m">$75M</span> (was $50M)<br>
+      &bull; Tiered exclusion: 50% at 3yr, 75% at 4yr, <strong>100% at 5yr</strong><br><br>
+      <strong>Stack with trusts:</strong> Each trust beneficiary can claim a separate $15M exclusion. Family of 4 + 2 trusts = <span class="m">$90M tax-free</span>.
+      <div class="example-box">
+        <div class="label">Example</div>
+        Found a C-Corp, issue yourself stock at $1/share. 5 years later, sell for $10M. Pay <span class="m">$0 in capital gains tax</span>. All of it.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🏢</span> C-Corp — 21% Flat Rate</span></summary>
+    <div class="strategy-body">
+      When business profits exceed personal tax brackets (32-37%), a C-Corp's flat <span class="m">21%</span> rate becomes attractive.<br><br>
+      <strong>Accumulated earnings:</strong> Retain and reinvest profits inside the C-Corp at 21%. Only pay personal tax when you take money out as salary or dividends.<br><br>
+      <strong>Qualified dividends:</strong> When you do take money out, qualified dividends are taxed at <span class="m">0%/15%/20%</span> capital gains rates, not ordinary income rates.<br><br>
+      <strong>Combined effective rate:</strong> 21% corporate + 15% dividend = ~32.85% total — comparable to the 32% personal bracket but with the ability to <strong>time</strong> when you take income.
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🏗️</span> Entity Stacking</span></summary>
+    <div class="strategy-body">
+      How wealthy business owners structure multiple entities:<br><br>
+      <strong>Operating LLC</strong> → does the actual business work<br>
+      <strong>Management LLC</strong> → charges management fees to the operating company<br>
+      <strong>Holding LLC</strong> → owns assets (real estate, IP, equipment) and leases them to the operating entity<br><br>
+      Each entity can be in a different <strong>state</strong> (Wyoming for privacy, Nevada for asset protection, South Dakota for trusts). Management fees shift income between entities to optimize tax treatment across jurisdictions.
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🛡️</span> Captive Insurance</span></summary>
+    <div class="strategy-body">
+      <span class="irc">§831(b)</span> Create your own insurance company. Your operating business pays premiums (deductible). The captive pays tax only on <strong>investment income</strong>, not on premiums received.<br><br>
+      <strong>Premium limit:</strong> <span class="m">$2.85M/yr</span> (2025, inflation-adjusted).<br><br>
+      The captive can insure risks not covered by commercial insurers (cyber liability, supply chain disruption, reputation damage).
+      <div class="warning-box">
+        <div class="label">IRS Warning</div>
+        As of January 2025, certain micro-captive transactions are <strong>listed transactions</strong> requiring enhanced disclosure. On the IRS "Dirty Dozen" list. Must have genuine risk transfer and reasonable premiums. Consult a captive insurance specialist.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">💰</span> S-Corp + Cash Balance + 401(k) Combo</span></summary>
+    <div class="strategy-body">
+      The ultimate business owner tax shelter stack:<br><br>
+      1. <strong>S-Corp:</strong> Pay reasonable salary → save SE tax on distributions<br>
+      2. <strong>Max 401(k):</strong> $23,500 employee + employer match<br>
+      3. <strong>Cash Balance Plan:</strong> $200,000-$400,000+ additional<br>
+      4. <strong>QBI Deduction:</strong> 20% off remaining business income<br>
+      5. <strong>Business deductions:</strong> Home office, vehicle, equipment, etc.<br>
+      <div class="example-box">
+        <div class="label">Total Shelter — Age 55, $500k Business Income</div>
+        401(k): $31,000 + Cash Balance: $300,000 + HSA: $8,550 + S-Corp distribution savings: $15,000 + QBI deduction: $30,000 + Business deductions: $40,000 = <span class="m">$424,550 sheltered or saved</span>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- TIER 6: TRUSTS & ESTATE PLANNING       -->
+<!-- ══════════════════════════════════════ -->
+<section class="tier t6" id="tier6">
+  <div class="tier-header">
+    <div class="tier-num">06</div>
+    <div class="tier-info">
+      <h2>Trusts & Estate Planning</h2>
+      <div class="tier-sub">Transfer wealth across generations with minimal tax erosion</div>
+      <div class="tier-income">NET WORTH: $1M+</div>
+    </div>
+  </div>
+
+  <details class="strategy" open>
+    <summary><span class="strategy-title"><span class="icon">🎯</span> GRAT — Grantor Retained Annuity Trust</span></summary>
+    <div class="strategy-body">
+      <span class="irc">§2702</span> Transfer appreciating assets to a trust. Receive annuity payments back over a set term (typically 2-10 years).<br><br>
+      If assets grow faster than the IRS §7520 assumed interest rate, the <strong>excess passes to heirs gift and estate tax-free</strong>.<br><br>
+      <strong>"Zeroed-out GRAT":</strong> Set the annuity equal to 100% of the transferred value = zero reportable taxable gift. If assets outperform the §7520 rate, pure upside to heirs.<br><br>
+      <strong>Rolling GRATs:</strong> Use 2-year terms back-to-back. If one GRAT underperforms, you lose nothing. If it outperforms, the excess transfers tax-free. Heads you win, tails you break even.
+      <div class="warning-box">
+        <div class="label">Proposed Reform</div>
+        Congress has proposed requiring minimum 10-year terms and 25% minimum remainder value. Not yet enacted.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🔧</span> IDGT — Intentionally Defective Grantor Trust</span></summary>
+    <div class="strategy-body">
+      <span class="irc">Rev. Rul. 85-13</span> An irrevocable trust that's "defective" on purpose: income is taxed to the grantor (you), but assets are <strong>excluded from your estate</strong>.<br><br>
+      <strong>Benefits:</strong><br>
+      &bull; You pay the trust's income taxes = additional tax-free gift to beneficiaries<br>
+      &bull; Trust assets grow without "tax drag"<br>
+      &bull; Installment sale to IDGT is NOT a taxable event<br><br>
+      <strong>Estate freeze technique:</strong> Seed IDGT with 10% equity. Sell appreciated business/assets to the trust for a promissory note at AFR interest rate. All future appreciation transfers to beneficiaries estate-tax-free. You receive only the fixed note payments.
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🏰</span> Dynasty Trust</span></summary>
+    <div class="strategy-body">
+      Leverage the GST (Generation-Skipping Transfer) exemption to create a trust that lasts for <strong>hundreds of years</strong> — or forever.<br><br>
+      <strong>Best states:</strong> Nevada, South Dakota, Alaska — no state income tax on trust income AND no rule against perpetuities (trusts can last forever).<br><br>
+      Assets compound inside the trust across generations without estate tax at each death. A <span class="m">$15M</span> gift today could become <span class="m">$100M+</span> for your grandchildren's grandchildren — all estate-tax-free.
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🏢</span> Family Limited Partnership (FLP)</span></summary>
+    <div class="strategy-body">
+      Transfer business or investment assets to an FLP, then gift <strong>limited partnership interests</strong> to family members.<br><br>
+      <strong>Valuation discounts:</strong><br>
+      &bull; Lack of control (minority interest): <span class="m">15-40%</span> discount<br>
+      &bull; Lack of marketability: <span class="m">10-30%</span> discount<br>
+      &bull; <strong>Combined: 25-60%</strong> discount on taxable value<br><br>
+      <strong>Example:</strong> $2M in assets → FLP with 30% combined discount → taxable gift value = <span class="m">$1.4M</span>. You saved <span class="m">$600,000</span> in taxable value (at 40% estate tax = <span class="m">$240,000 in tax savings</span>).
+      <div class="warning-box">
+        <div class="label">IRS Scrutiny</div>
+        FLPs must have a <strong>legitimate business purpose</strong> beyond tax savings. Overly aggressive discounts attract audits. Get a qualified appraisal.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">💎</span> Estate & Gift Tax Exemption</span></summary>
+    <div class="strategy-body">
+      <strong>OBBBA made the increased exemption permanent:</strong><br><br>
+      &bull; Lifetime exemption: <span class="m">$15M per person</span> / <span class="m">$30M married</span> (2026, inflation-adjusted)<br>
+      &bull; Annual gift exclusion: <span class="m">$19,000/person</span> (unlimited recipients)<br>
+      &bull; <strong>529 superfunding:</strong> <span class="m">$95,000</span> in one year ($190k married) = 5 years of annual exclusions upfront<br>
+      &bull; Married couples can "split" gifts — effectively $38,000/year per recipient<br><br>
+      <strong>Estate tax rate:</strong> 40% on amounts above the exemption.
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">💝</span> Charitable Trusts (CRT / CLT)</span></summary>
+    <div class="strategy-body">
+      <strong>Charitable Remainder Trust (CRT/CRUT):</strong> <span class="irc">§664</span><br>
+      You get an income stream (5-50% of trust value annually). Remainder goes to charity. Partial income tax deduction upfront. <strong>Sell appreciated assets inside the CRT = no capital gains on the sale.</strong><br><br>
+      <strong>Charitable Lead Trust (CLT):</strong><br>
+      Reverse of CRT — charity gets income first, then remainder passes to your heirs. If trust growth exceeds the §7520 rate, excess transfers to heirs <strong>gift/estate tax-free</strong>.<br><br>
+      <strong>ILIT (Irrevocable Life Insurance Trust):</strong><br>
+      Life insurance proceeds held outside your estate. Fund with annual gift exclusion via Crummey powers. $5M life insurance policy = <span class="m">$5M tax-free to heirs</span>, not subject to estate tax.
+    </div>
+  </details>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- TIER 7: THE BILLIONAIRE PLAYBOOK       -->
+<!-- ══════════════════════════════════════ -->
+<section class="tier t7" id="tier7">
+  <div class="tier-header">
+    <div class="tier-num">07</div>
+    <div class="tier-info">
+      <h2>The Billionaire Playbook</h2>
+      <div class="tier-sub">How the ultra-wealthy pay effective tax rates under 5%</div>
+      <div class="tier-income">NET WORTH: $10M+</div>
+    </div>
+  </div>
+
+  <details class="strategy" open>
+    <summary><span class="strategy-title"><span class="icon">💀</span> Buy, Borrow, Die</span></summary>
+    <div class="strategy-body">
+      The three-step strategy that lets billionaires live lavishly while paying almost nothing in taxes:<br><br>
+      <strong>1. BUY:</strong> Accumulate appreciating assets (stocks, real estate, art). Never sell. Unrealized gains are NOT taxed.<br><br>
+      <strong>2. BORROW:</strong> Take out Securities-Backed Lines of Credit (SBLOCs) against your portfolio. Borrow 50-95% of asset value at low interest rates. Loan proceeds are NOT income — not taxable.<br><br>
+      <strong>3. DIE:</strong> At death, heirs receive assets with a <strong>stepped-up cost basis</strong>. ALL accumulated capital gains are wiped out. Heirs can sell immediately and pay <strong>$0 in capital gains tax</strong>. Or they can start the cycle again.
+      <div class="politician-box">
+        <div class="label">ProPublica: The Secret IRS Files</div>
+        The top 25 wealthiest Americans (2014-2018):<br>
+        &bull; Collective wealth grew by <span class="m">$401 billion</span><br>
+        &bull; Total federal income taxes paid: <span class="m">$13.6 billion</span><br>
+        &bull; <strong>True tax rate: 3.4%</strong><br><br>
+        <strong>Jeff Bezos:</strong> Wealth grew <span class="m">$127 billion</span>. Paid <span class="m">$1.4B</span> in taxes. True rate: <span class="m">1.1%</span>. Paid $0 in 2007 and 2011.<br>
+        <strong>Warren Buffett:</strong> True rate: <span class="m">0.1%</span>. Reported income of $11.6-$25M while wealth grew by $24B.<br>
+        <strong>Elon Musk:</strong> Paid <span class="m">$0</span> federal income tax in 2018.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🛡️</span> Private Placement Life Insurance (PPLI)</span></summary>
+    <div class="strategy-body">
+      Put hedge fund, private equity, or alternative investments inside a <strong>life insurance wrapper</strong>. The investment grows <strong>tax-free forever</strong>.<br><br>
+      &bull; <strong>No income tax</strong> on investment gains inside the policy<br>
+      &bull; <strong>No capital gains tax</strong> — ever<br>
+      &bull; <strong>No estate tax</strong> if structured properly (ILIT)<br>
+      &bull; Access cash via policy loans (tax-free)<br><br>
+      <strong>Minimums:</strong> Typically <span class="m">$1M+</span> initial premium. Offered by offshore carriers (Bermuda, Cayman Islands) and select US carriers.<br><br>
+      This is how ultra-wealthy families put their hedge fund investments inside an insurance shell and <strong>never pay taxes on the returns</strong>.
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🏛️</span> Private Foundation</span></summary>
+    <div class="strategy-body">
+      Create your own charitable foundation. Income tax deduction on contributions: <span class="m">30% of AGI</span> for cash, <span class="m">20%</span> for appreciated assets.<br><br>
+      <strong>What you control:</strong><br>
+      &bull; Investment of all foundation assets (hire your own money managers)<br>
+      &bull; Hiring decisions (employ family members at "reasonable" salaries)<br>
+      &bull; Travel for "charitable purposes" (site visits, conferences, research)<br>
+      &bull; Grant-making decisions (which charities receive funding)<br><br>
+      <strong>Must distribute:</strong> At least <span class="m">5%</span> of assets annually for charitable purposes. Administrative expenses count toward this 5%.<br><br>
+      <strong>Reality:</strong> A private foundation lets wealthy families maintain control over assets, employ family, fund travel, and get tax deductions — all while supporting genuine charitable causes.
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🛢️</span> Oil & Gas Investments</span></summary>
+    <div class="strategy-body">
+      <strong>Why politicians invest in oil:</strong> The tax code gives oil and gas investments uniquely favorable treatment.<br><br>
+      <strong>Intangible Drilling Costs (IDCs):</strong> 65-80% of well cost. <span class="m">100% deductible in year 1</span> for independent producers. These aren't passive losses — they can offset W-2 income.<br><br>
+      <strong>Working interest exception:</strong> <span class="irc">§469</span> A working interest in oil/gas is <strong>NOT a passive activity</strong> regardless of your participation level. Losses offset active income (salary, business income).<br><br>
+      <strong>Percentage depletion:</strong> <span class="m">15% of gross income</span> deducted from oil/gas production — even AFTER you've recovered your full investment. One of the few deductions that can exceed your basis.<br><br>
+      <strong>Tangible Drilling Costs:</strong> Equipment (wellheads, casing) — 100% deductible via depreciation. 40% upfront in 2025.
+      <div class="example-box">
+        <div class="label">Example</div>
+        Invest <span class="m">$100k</span> in an oil well. IDCs = $75k (deductible year 1). TDCs = $25k (depreciated). At 37% bracket: <span class="m">$27,750 tax savings in year 1</span> on a $100k investment. Plus ongoing depletion deductions.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🌲</span> Conservation Easements</span></summary>
+    <div class="strategy-body">
+      Donate development rights on land to a land trust. Deduct the difference between the land's "highest and best use" value and its restricted value.<br><br>
+      <strong>Historically:</strong> Syndicated deals offered 4:1 ratios — invest $250k, get $1M deduction.
+      <div class="warning-box">
+        <div class="label">IRS Crackdown</div>
+        Syndicated conservation easements are now a <strong>listed transaction</strong> if the deduction exceeds 2.5× the investor's basis. <strong>40% gross valuation misstatement penalty</strong> applies. SECURE 2.0 Act restricted partnership/S-Corp deductions.<br><br>
+        <strong>Still legal:</strong> Genuine conservation easements on land you actually own. But the syndicated "invest and deduct" deals are effectively dead.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">📝</span> Installment Sale to Grantor Trust</span></summary>
+    <div class="strategy-body">
+      Sell appreciated assets to your own IDGT in exchange for a promissory note at the AFR (Applicable Federal Rate).<br><br>
+      <strong>Why it works:</strong> Under <span class="irc">Rev. Rul. 85-13</span>, a sale to your own grantor trust is <strong>not a taxable event</strong>. No capital gains triggered.<br><br>
+      <strong>Estate freeze:</strong> You swap an appreciating asset for a fixed-rate note. All future growth above the AFR interest rate transfers to trust beneficiaries <strong>estate-tax-free</strong>.<br><br>
+      <strong>Structure:</strong> Seed IDGT with 10% equity (gift). Sell remaining 90% for a note. Trust pays you interest at AFR (currently very low). All upside flows to the next generation.
+    </div>
+  </details>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- TIER 8: GEOGRAPHIC & ADVANCED          -->
+<!-- ══════════════════════════════════════ -->
+<section class="tier t8" id="tier8">
+  <div class="tier-header">
+    <div class="tier-num">08</div>
+    <div class="tier-info">
+      <h2>Geographic & Advanced Strategies</h2>
+      <div class="tier-sub">Location arbitrage, crypto, charitable optimization, and more</div>
+      <div class="tier-income">INCOME: Varies</div>
+    </div>
+  </div>
+
+  <details class="strategy" open>
+    <summary><span class="strategy-title"><span class="icon">🗺️</span> No-Income-Tax States</span></summary>
+    <div class="strategy-body">
+      <strong>9 states with zero state income tax:</strong> Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, Wyoming.<br><br>
+      A high earner at <span class="m">$200k</span> saves <span class="m">$15,000+/yr</span> moving from a high-tax state (CA 13.3%, NY 10.9%) to a zero-tax state.<br><br>
+      <strong>Caveat:</strong> No-income-tax states often have higher property taxes (TX, NH) or sales taxes (TN, NV 9%+). Calculate total tax burden, not just income tax.
+      <div class="example-box">
+        <div class="label">California → Florida</div>
+        $500k income × 13.3% CA top rate = <span class="m">~$55,000/yr saved</span> by moving to FL.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🏝️</span> Puerto Rico Act 60</span></summary>
+    <div class="strategy-body">
+      <strong>Corporate tax:</strong> <span class="m">4%</span> (vs. 21% federal). <strong>Capital gains:</strong> <span class="m">0%</span> for pre-2026 decree holders, <span class="m">4%</span> for new applicants after 2025.<br><br>
+      <strong>Requirements:</strong> Become a bona fide PR resident (183+ days/yr). Must not have been a PR resident in 15 years prior.<br><br>
+      <strong>Program extended through 2055.</strong> Dividends from PR-sourced business: <span class="m">100% tax-exempt</span>.<br><br>
+      <strong>Critical deadline:</strong> Apply before end of 2025 to lock in the 0% capital gains rate.
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🌐</span> State Trust Situs Planning</span></summary>
+    <div class="strategy-body">
+      Create trusts in states with <strong>no state income tax</strong> on trust income AND <strong>no rule against perpetuities</strong>:<br><br>
+      &bull; <strong>South Dakota:</strong> No income tax, perpetual trusts, strong asset protection, trust-friendly courts<br>
+      &bull; <strong>Nevada:</strong> Same + no franchise tax, 365-year trust term<br>
+      &bull; <strong>Alaska:</strong> Same + domestic asset protection trusts (self-settled)<br><br>
+      A California resident creating a dynasty trust in South Dakota avoids <span class="m">13.3% state income tax</span> on all trust income — legally.
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">₿</span> Cryptocurrency Tax Strategies</span></summary>
+    <div class="strategy-body">
+      <strong>Wash sale rule does NOT apply to crypto</strong> (as of 2026). Crypto is classified as "property," not "securities." You can sell at a loss and <strong>immediately rebuy</strong> the same asset — harvesting the tax loss while maintaining your position.<br><br>
+      &bull; <strong>Tax-loss harvesting:</strong> Sell losers, offset gains + $3k/yr against ordinary income. Buy back immediately<br>
+      &bull; <strong>Self-directed IRA:</strong> Hold crypto in a Roth SDIRA = tax-free growth<br>
+      &bull; <strong>Mining:</strong> Equipment and electricity costs are deductible business expenses<br><br>
+      <strong>Coming changes:</strong> Form 1099-DA broker reporting starts 2025 (gross proceeds) and 2026 (cost basis). Wash sale extension has appeared in draft bills but hasn't passed.
+      <div class="warning-box">
+        <div class="label">Legislation Watch</div>
+        The PARITY Act proposes extending wash sale rules to crypto. Monitor closely — this window may close.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">✈️</span> Foreign Earned Income Exclusion</span></summary>
+    <div class="strategy-body">
+      <span class="irc">§911</span> US citizens living abroad can exclude up to <span class="m">$126,500</span> (2025) of foreign earned income from federal taxes. Must meet either:<br><br>
+      &bull; <strong>Physical presence test:</strong> 330+ days outside the US in a 12-month period<br>
+      &bull; <strong>Bona fide residence test:</strong> Established residence in a foreign country for a full tax year<br><br>
+      Plus the <strong>Foreign Housing Exclusion</strong> for qualifying housing expenses above a base amount.
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🎁</span> Donor-Advised Fund (DAF) Bunching</span></summary>
+    <div class="strategy-body">
+      <strong>Strategy:</strong> Concentrate 3-5 years of charitable donations into a single year via a DAF. Itemize that year (exceeding the standard deduction). Take the standard deduction in other years.<br><br>
+      <strong>How it works:</strong> Contribute cash or appreciated stock to a DAF → immediate tax deduction → distribute to charities over time at your discretion.<br><br>
+      <strong>2026 standard deduction:</strong> <span class="m">$16,100</span> single / <span class="m">$32,200</span> MFJ.<br><br>
+      <strong>New for 2026:</strong> 0.5% AGI floor on charitable deductions (only amounts exceeding 0.5% of AGI are deductible). Makes bunching <strong>even more valuable</strong>.
+      <div class="example-box">
+        <div class="label">Example</div>
+        Give $5k/yr normally × 5 years = $25k. Below standard deduction each year = <span class="m">$0 tax benefit</span>.<br>
+        Bunch: Give $25k in year 1 via DAF → itemize → <span class="m">~$5,000-$8,000 tax savings</span>. Years 2-5: take standard deduction. Same giving, better tax outcome.
+      </div>
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">📉</span> Tax-Loss Harvesting</span></summary>
+    <div class="strategy-body">
+      Sell investments that are <strong>down</strong> to realize capital losses. Offset capital gains dollar-for-dollar, plus deduct up to <span class="m">$3,000/yr</span> against ordinary income. Unused losses <strong>carry forward forever</strong>.<br><br>
+      Buy a similar (not "substantially identical") fund immediately to maintain market exposure. Example: sell S&P 500 index fund → buy total market fund.<br><br>
+      <strong>Wash sale rule (30 days)</strong> applies to stocks and securities but NOT crypto (see above).
+    </div>
+  </details>
+
+  <details class="strategy">
+    <summary><span class="strategy-title"><span class="icon">🎗️</span> Qualified Charitable Distribution (Age 70½+)</span></summary>
+    <div class="strategy-body">
+      <span class="irc">§408(d)(8)</span> Donate up to <span class="m">$105,000</span> directly from your IRA to charity. Counts toward your Required Minimum Distribution (RMD) but is <strong>NOT included in taxable income</strong>.<br><br>
+      Far better than: withdraw IRA → pay income tax → donate cash → claim deduction. QCD skips all of that — the money goes directly from IRA to charity, never hits your tax return.
+    </div>
+  </details>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- INCOME SCENARIOS                       -->
+<!-- ══════════════════════════════════════ -->
+<section class="scenarios">
+  <h2>What Can You Save? Real-World Scenarios</h2>
+  <div class="scenario-grid">
+
+    <div class="scenario s-blue">
+      <div class="income">$75k</div>
+      <div class="type">W-2 Employee</div>
+      <div class="strategies">Max 401(k) + HSA. Standard deduction. Backdoor Roth.</div>
+      <div class="savings">~$8,000/yr</div>
+      <div class="savings-label">Estimated Tax Savings</div>
+    </div>
+
+    <div class="scenario s-green">
+      <div class="income">$150k + $50k</div>
+      <div class="type">W-2 + Side Hustle</div>
+      <div class="strategies">LLC + Solo 401(k) + S-Corp election + business deductions + QBI. Mega backdoor Roth if available.</div>
+      <div class="savings">~$20,000+/yr</div>
+      <div class="savings-label">Estimated Tax Savings</div>
+    </div>
+
+    <div class="scenario s-amber">
+      <div class="income">$300k</div>
+      <div class="type">Business Owner</div>
+      <div class="strategies">S-Corp + Cash Balance Plan + STR with cost seg + Augusta Rule + hire kids. Real estate depreciation.</div>
+      <div class="savings">~$80,000+/yr</div>
+      <div class="savings-label">Estimated Tax Savings</div>
+    </div>
+
+    <div class="scenario s-orange">
+      <div class="income">$1M+</div>
+      <div class="type">High-Net-Worth</div>
+      <div class="strategies">Full stack: S-Corp + QSBS + OZ investments + GRATs + FLP discounts + defined benefit plan + entity stacking.</div>
+      <div class="savings">~$200,000+/yr</div>
+      <div class="savings-label">Estimated Tax Savings</div>
+    </div>
+
+    <div class="scenario s-red">
+      <div class="income">$10M+</div>
+      <div class="type">Ultra-High-Net-Worth</div>
+      <div class="strategies">Buy-Borrow-Die + PPLI + dynasty trust + FLP discounts + private foundation + oil & gas IDCs + installment sales to IDGTs.</div>
+      <div class="savings">&lt;5% effective rate</div>
+      <div class="savings-label">Billionaire Tax Rate</div>
+    </div>
+
+  </div>
+</section>
+
+</div><!-- end .content -->
+
+<!-- ═══════════ WARNINGS ═══════════ -->
+<div class="footer-warnings">
+  <div class="fw-box">
+    <div class="fw-title">Critical Warnings</div>
+    <div class="fw-grid">
+      <div class="fw-item"><span class="x">X</span> <span><strong>Profit motive required</strong> — IRS expects your business to be profitable 3 of 5 years. Fake businesses = fraud.</span></div>
+      <div class="fw-item"><span class="x">X</span> <span><strong>Don't over-deduct</strong> — 100% vehicle business use or bedroom "home office" = audit red flags.</span></div>
+      <div class="fw-item"><span class="x">X</span> <span><strong>Keep meticulous records</strong> — Receipts, mileage logs, meeting minutes, time tracking. Can't prove it = can't deduct it.</span></div>
+      <div class="fw-item"><span class="x">X</span> <span><strong>Spending ≠ saving</strong> — A $1,000 deduction at 24% saves $240. You're still out $760. Never spend just for the write-off.</span></div>
+      <div class="fw-item"><span class="x">X</span> <span><strong>Consult a CPA / tax attorney</strong> — Every situation is different. State taxes, AMT, phase-outs, and your specific income change the math.</span></div>
+      <div class="fw-item"><span class="x">X</span> <span><strong>Tax law changes constantly</strong> — Dollar amounts, thresholds, and rules change yearly. Verify current limits before acting. OBBBA (July 2025) changed many provisions.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SOURCES ═══════════ -->
+<div class="sources">
+  <h3>Sources & References</h3>
+  <ul>
+    <li><a href="https://www.propublica.org/article/the-secret-irs-files-trove-of-never-before-seen-records-reveal-how-the-wealthiest-avoid-income-tax">ProPublica — The Secret IRS Files</a></li>
+    <li><a href="https://www.irs.gov/newsroom/one-big-beautiful-bill-provisions">IRS — One Big Beautiful Bill Act Provisions</a></li>
+    <li><a href="https://www.fidelity.com/viewpoints/wealth-management/insights/grantor-retained-annuity-trusts">Fidelity — Grantor Retained Annuity Trusts</a></li>
+    <li><a href="https://www.fidelity.com/viewpoints/wealth-management/insights/intentionally-defective-grantor-trusts">Fidelity — Intentionally Defective Grantor Trusts</a></li>
+    <li><a href="https://budgetlab.yale.edu/research/buy-borrow-die-options-reforming-tax-treatment-borrowing-against-appreciated-assets">Yale Budget Lab — Buy, Borrow, Die</a></li>
+    <li><a href="https://www.recostseg.com/post/str-loophole-bonus-depreciation">RE Cost Seg — STR Loophole & Bonus Depreciation</a></li>
+    <li><a href="https://millancpa.com/insights/section-1202-qualified-small-business-stock-qsbs-tax-guide">Millan CPA — Section 1202 QSBS Guide</a></li>
+    <li><a href="https://www.emparion.com/cash-balance-plan-lifetime-contribution-limits/">Emparion — Cash Balance Plan Limits 2026</a></li>
+    <li><a href="https://www.cashbalancedesign.com/resources/contribution-limits/">Cash Balance Design — Contribution Limits</a></li>
+    <li><a href="https://districtcapitalmanagement.com/mega-backdoor-roth/">District Capital — Mega Backdoor Roth Guide</a></li>
+    <li><a href="https://investatepr.com/tax-incentives">InvestPR — Puerto Rico Act 60 Tax Incentives</a></li>
+    <li><a href="https://www.kitces.com/blog/idgt-installment-sale-to-intentionally-defective-grantor-trust-rules/">Kitces — IDGT Installment Sale Rules</a></li>
+    <li><a href="https://taxfoundation.org/data/all/state/state-income-tax-rates/">Tax Foundation — 2025 State Income Tax Rates</a></li>
+    <li><a href="https://www.bastacpa.com/oil-gas-tax-breaks-explained-by-cpa/">Basta CPA — Oil & Gas Tax Breaks Explained</a></li>
+    <li><a href="https://tokentax.co/blog/wash-sale-trading-in-crypto">TokenTax — Crypto Wash Sale Rules 2026</a></li>
+    <li><a href="https://www.fidelitycharitable.org/guidance/charitable-tax-strategies/bunching-charitable-donations.html">Fidelity Charitable — Bunching Donations Strategy</a></li>
+  </ul>
+</div>
+
+</body>
+</html>
